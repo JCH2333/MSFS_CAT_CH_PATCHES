@@ -1,6 +1,41 @@
 {
   "schemaVersion": 1,
-  "catalogVersion": "2026.08.06",
-  "updatedAt": "2026-08-06T00:00:00Z",
-  "patches": []
+  "catalogVersion": "2026.08.08",
+  "updatedAt": "2026-08-08T00:00:00Z",
+  "patches": [
+    {
+      "id": "fsrealistic-plus-zh-cn",
+      "name": "FSRealistic+ 简体中文",
+      "summary": "FSRealistic+ 1.1.0 面板、设置、效果与诊断界面简体中文补丁",
+      "version": "1.0.0",
+      "status": "published",
+      "compatibility": ["MSFS 2024"],
+      "targetHint": "请选择 rkapps-fsrealistic 安装目录",
+      "releaseNotes": ["首次发布", "覆盖主面板、设置、效果名称、提示与诊断窗口"],
+      "package": {
+        "releaseTag": "fsrealistic-plus-zh-cn-v1.0.0",
+        "assetName": "msfs-cat-ch-fsrealistic-plus-zh-cn-v1.0.0.zip",
+        "sha256": "01cfe643a4cec3c192ac8e51234bd26797efe338184c2f697c171f77d2060f7d",
+        "size": 15187,
+        "contentRoot": ""
+      }
+    },
+    {
+      "id": "gsx-pro-zh-cn",
+      "name": "GSX Pro 简体中文",
+      "summary": "GSX Pro 4.0.14 菜单、设置与运行状态简体中文补丁",
+      "version": "1.0.0",
+      "status": "published",
+      "compatibility": ["MSFS 2020", "MSFS 2024"],
+      "targetHint": "请选择 fsdreamteam-gsx-pro 安装目录",
+      "releaseNotes": ["首次发布", "覆盖主菜单、设置、SimBrief 与启动状态文字"],
+      "package": {
+        "releaseTag": "gsx-pro-zh-cn-v1.0.0",
+        "assetName": "msfs-cat-ch-gsx-pro-zh-cn-v1.0.0.zip",
+        "sha256": "746057744f5eb21d70fdf12b8a973ff99132443e217937b6f5d019c0eb5dcd21",
+        "size": 418795,
+        "contentRoot": ""
+      }
+    }
+  ]
 }
