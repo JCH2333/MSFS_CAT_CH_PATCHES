@@ -1,0 +1,1195 @@
+﻿<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8" />
+  
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="/SCSS/common.css" />
+  <link rel="stylesheet" href="FSRealistic.css" />
+
+  <!-- JavaScript Files -->
+  <script type="text/javascript" src="/JS/coherent.js"></script>
+  <script type="text/javascript" src="/JS/common.js"></script>
+  <script type="text/javascript" src="/JS/dataStorage.js"></script>
+  <script type="text/javascript" src="/JS/buttons.js"></script>
+  <script type="text/javascript" src="/JS/simvar.js"></script>
+  <script type="text/javascript" src="/JS/Services/ToolBarPanels.js"></script>
+  <script type="text/javascript" src="/Pages/VCockpit/Instruments/Shared/BaseInstrument.js"></script>
+  <script type="text/javascript" src="/JS/slider.js"></script>
+  <script type="text/javascript" src="Port.js"></script>
+  <script type="text/javascript" src="FSRealistic.js"></script>
+  <script type="text/javascript" src="FSRealistic.zh-CN.js"></script>
+  <script type="text/javascript" src="/JS/debug.js"></script>
+
+  <!-- HTML Templates -->
+  <link rel="import" href="/templates/NewPushButton/NewPushButton.html" />
+  <link rel="import" href="/templates/ToggleButton/toggleButton.html" />
+  <link rel="import" href="/templates/tabMenu/tabMenu.html" />
+  <link rel="import" href="/templates/ingameUi/ingameUi.html" />
+  <link rel="import" href="/templates/ingameUiHeader/ingameUiHeader.html" />
+  <link rel="import" href="/templates/NewListButton/NewListButton.html" />
+  <link rel="import" href="/templates/slider/Slider.html" />
+  <link rel="import" href="/templates/DropDown/DropDown.html" />
+  <link rel="import" href="/templates/virtualScroll/virtualScroll.html" />
+
+   <style>
+
+        
+
+        
+        button:disabled {
+            opacity: 1.0;
+            cursor: not-allowed;
+        }
+        
+
+    </style>
+</head>
+
+<body class="border-box">
+  <ingamepanel-custom created="true" data-input-group="INGAMEPANEL-CUSTOM">
+    
+    <ingame-ui 
+      id="FSRealisticPanel" 
+      panel-id="FSRealisticPanel" 
+      title="rkApps FSRealistic+"
+      class="ingameUiFrame fittedContent collapsible draggable" 
+      content-fit="true" 
+      resize="both" 
+      min-width="150"
+      min-height="150" 
+      default-child-button="ingame-ui-header" 
+      vertical-navigation="ingame-ui-header, .ingameUiContent">
+
+      <!-- ========================================
+           MODAL WINDOWS
+           ======================================== -->
+
+    <!-- ====================================================================
+     ADD THIS TO FSRealistic.html AFTER THE OTHER MODALS (around line 150)
+     ==================================================================== -->
+
+<!-- Upload Sound Modal -->
+
+<!-- Rating Modal -->
+<div class="rating-sound-modal-background hidden" id="ratingSoundModalBackground">
+  <div class="rating-sound-modal">
+    
+    <!-- Header -->
+   
+    
+    <!-- Body -->
+    <div class="rating-sound-body">
+      <div class="rating-stars-container">
+
+        <span class="rating-star-btn" data-rating="1">★</span>
+        <span  class="rating-star-btn" data-rating="2">★</span>
+        <span  class="rating-star-btn" data-rating="3">★</span>
+        <span  class="rating-star-btn" data-rating="4">★</span>
+        <span  class="rating-star-btn" data-rating="5">★</span>
+      </div>
+      <div class="rating-labels">
+        <span>POOR</span>
+        <span>EXCELLENT</span>
+      </div>
+    </div>
+    
+    <!-- Footer -->
+    <div class="rating-sound-footer">
+      <button class="rating-sound-cancel-btn" id="ratingSoundCancelBtn">CANCEL</button>
+    </div>
+    
+  </div>
+</div>
+     
+<!-- Sound Cloud Modal -->
+
+
+      <!-- Import Modal -->
+      <div class="import-modal-background hidden" id="importModalBackground">
+        <div class="import-modal">
+          <div class="modal-center">
+            <drop-down id="weatherDrop" class="import-dropdown"></drop-down>
+          </div>
+          <div class="modal-footer">
+            <button type="button" id="applyBtn" class="modal-button" title="">APPLY</button>
+            <div>&nbsp;</div>
+            <button type="button" id="cancelBtn" class="modal-button" title=""><b>CANCEL</b></button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Update Modal -->
+      <div class="update-modal-background hidden" id="updateModalBackground">
+        <div class="update-modal">
+          <div class="update-modal-center">
+            <div class="scrollable-text" id="releaseNotes">
+
+            </div>
+          </div>
+          <div class="update-modal-footer">
+            <button type="button" id="updateBtn" class="modal-button" title="">UPDATE</button>
+            <div>&nbsp;</div>
+            <button type="button" id="updateCancelBtn" class="modal-button" title=""><b>CANCEL</b></button>
+          </div>
+        </div>
+      </div>
+
+      <div class="changelog-modal-background hidden" id="changelogModalBackground">
+        <div class="changelog-modal">
+          <div class="update-modal-center">
+            <div class="scrollable-text" id="changelog">
+
+            </div>
+          </div>
+          <div class="update-modal-footer">
+            <button type="button" id="changelogCloseBtn" class="modal-button" title=""><b>CLOSE</b></button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Share Modal -->
+      <div class="share-modal-background hidden" id="shareModalBackground">
+        <div class="share-modal">
+          <div class="share-modal-center">
+            <input type="text" id="authorNameInput" class="share-profile-input" maxlength="18" placeholder="AUTHOR NAME" required />
+            <input type="text" id="descriptionInput" class="share-profile-input" maxlength="55" placeholder="DESCRIPTION" required />
+          </div>
+          <div class="share-modal-footer">
+            <button type="button" id="shareBtn" class="modal-button" title="">SHARE</button>
+            <div>&nbsp;</div>
+            <button type="button" id="shareCancelBtn" class="modal-button" title=""><b>CANCEL</b></button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Load Sound Modal -->
+      <div class="load-sound-modal-background hidden" id="loadSoundModalBackground">
+        <div class="load-sound-modal">
+          <div class="load-sound-modal-center">
+            
+            <label class="load-sound-modal-title">
+              SOUND REQUIREMENTS
+            </label>
+<!--
+            <label class="load-sound-modal-requirements">
+              Audio file type Ogg, mono, minimum 5 seconds of silence before and after every sound.
+            </label>
+
+            <img class="load-sound-modal-photo"
+              src="/images/custom_sound_segmented_rules.png"
+              alt="FSRealistic logo">
+ -->
+          </div>
+          <div class="load-sound-modal-footer">
+            <button type="button" id="loadSoundBrowseBtn" class="modal-button" title="">BROWSE</button>
+            <div>&nbsp;</div>
+            <button type="button" id="loadSoundCancelBtn" class="modal-button" title=""><b>CANCEL</b></button>
+          </div>
+        </div>
+      </div>
+
+      <!-- ========================================
+           SPECIAL SCREENS
+           ======================================== -->
+
+      <!-- Splash Screen -->
+      <div id="splashScreen">
+        <div class="splash-content">
+          <img class="logo"
+            src="/images/logo_w700.png"
+            alt="FSRealistic logo">
+        </div>
+      </div>
+
+      <!-- Activate Screen -->
+      <div id="activate">
+        <div class="activate-content">
+
+          <!-- Activation Options -->
+          <div id="activate-options" class="activate-section">
+            <button type="button" id="enterSerialBtn" class="activate-option-button" aria-controls="activate-serial">
+              ACTIVATE SERIAL
+            </button>
+            <button type="button" id="startTrialBtn" class="activate-option-button" aria-controls="activate-trial">
+              7-DAY TRIAL
+            </button>
+          </div>
+
+          <!-- Serial Activation Section -->
+          <div id="activate-serial" class="activate-section" hidden>
+            <div class="activate-text-input">
+              <label for="serialEmailInput" class="visually-hidden">EMAIL ADDRESS</label>
+              <input type="email" id="serialEmailInput" class="email-input" placeholder="EMAIL ADDRESS" autocomplete="email" required />
+              <button type="button" id="serialEmailPasteBtn" class="paste-button" aria-label="Paste email">PASTE</button>
+            </div>
+            <div class="activate-text-input">
+              <label for="serialInput" class="visually-hidden">Serial number</label>
+              <input type="text" id="serialInput" class="serial-input" placeholder="SERIAL" pattern="[A-Z0-9]{4}-[A-Z0-9]{4}-[A-Z0-9]{4}-[A-Z0-9]{4}" required />
+              <button type="button" id="serialPasteBtn" class="paste-button" aria-label="Paste serial">PASTE</button>
+            </div>
+            <div id="serial-error" class="activate-error" role="alert" aria-live="polite"></div>
+            <div class="activate-buttons-section">
+              <button type="button" id="activateWithSerialBtn" class="activate-button">ACTIVATE</button>
+              <button type="button" id="serialBackBtn" class="activate-button activate-back-button">BACK</button>
+            </div>
+            <button type="button" class="activate-button-support" id="aboutLinkBtn" url="support">CONTACT SUPPORT</button>
+          </div>
+          
+          <!-- Trial Activation Section -->
+          <div id="activate-trial" class="activate-section" hidden>
+            <div class="activate-text-input">
+              <label for="trialEmailInput" class="visually-hidden">EMAIL ADDRESS</label>
+              <input type="email" id="trialEmailInput" class="email-input" placeholder="EMAIL ADDRESS" autocomplete="email" required />
+              <button type="button" id="trialEmailPasteBtn" class="paste-button" aria-label="Paste email">PASTE</button>
+            </div>
+            <div id="trial-error" class="activate-error" role="alert" aria-live="polite"></div>
+            <div class="activate-buttons-section">
+              <button type="button" id="activateTrialBtn" class="activate-button">START TRIAL</button>
+              <button type="button" id="trialBackBtn" class="activate-button activate-back-button">BACK</button>
+            </div>
+          </div>
+        
+        </div>
+      </div>
+
+      <!-- No Service Screen -->
+      <div id="noService">
+        <div class="noService-content">
+          <img
+            src="/images/service_issue.png"
+            alt="ChasePlane Logo" 
+            class="no-service-logo">
+          
+          <label class="chaseplane-label">
+            <b>Service Not Connected</b><br><br>
+          </label>
+
+
+<!-- FSRealistic+ Troubleshooting Wizard -->
+<div id="fsr-wizard">
+  <style>
+    #fsr-wizard {
+      font-family: 'Segoe UI', Tahoma, sans-serif;
+      color: #fff;
+      padding: 24px;
+      max-width: 800px;
+      text-align: left;
+    }
+    #fsr-wizard .screen { display: none; }
+    #fsr-wizard .screen.active { display: block; }
+    #fsr-wizard h2 {
+      color: #7dd3fc;
+      font-size: 1.35em;
+      margin: 0 0 24px 0;
+      font-weight: 600;
+      text-align: center;
+    }
+    #fsr-wizard p {
+      line-height: 1.7;
+      margin: 12px 0;
+    }
+    #fsr-wizard ul, #fsr-wizard ol {
+      padding-left: 24px;
+      margin: 16px 0;
+    }
+    #fsr-wizard li {
+      line-height: 1.7;
+      margin: 8px 0;
+      text-align: left;
+    }
+    #fsr-wizard .code {
+      display: inline-block;
+      background: rgba(255,255,255,0.12);
+      padding: 4px 10px;
+      border-radius: 4px;
+      font-family: Consolas, monospace;
+      font-size: 0.88em;
+      word-break: break-all;
+      margin: 4px 0;
+    }
+    #fsr-wizard .code-block {
+      display: block;
+      background: rgba(42,42,42,0.5);
+      padding: 10px 14px;
+      border-radius: 6px;
+      border-left: 3px solid #7dd3fc;
+      font-family: Consolas, monospace;
+      font-size: 0.88em;
+      word-break: break-all;
+      margin: 10px 0;
+    }
+    #fsr-wizard .hint {
+      font-size: 0.85em;
+      color: rgba(255,255,255,0.6);
+      margin-top: 14px;
+      font-style: italic;
+    }
+    #fsr-wizard .box {
+      background: rgba(59,130,246,0.12);
+      border: 1px solid rgba(59,130,246,0.3);
+      padding: 16px 18px;
+      border-radius: 8px;
+      margin: 18px 0;
+    }
+    #fsr-wizard .box p { margin: 8px 0; }
+    #fsr-wizard .box.success {
+      background: rgba(34,197,94,0.12);
+      border-color: rgba(34,197,94,0.4);
+    }
+    #fsr-wizard .btns {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      margin-top: 28px;
+    }
+    #fsr-wizard .btns button {
+      margin: 6px;
+      flex: 1 1 auto;
+      min-width: 140px;
+    }
+    #fsr-wizard button {
+      padding: 12px 22px;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 0.95em;
+      font-weight: 500;
+      transition: background 0.2s, transform 0.1s;
+    }
+    #fsr-wizard button:active {
+      transform: scale(0.98);
+    }
+    #fsr-wizard .btn-primary { background: #3b82f6; color: #fff; }
+    #fsr-wizard .btn-primary:hover { background: #2563eb; }
+    #fsr-wizard .btn-yes { background: #22c55e; color: #fff; }
+    #fsr-wizard .btn-yes:hover { background: #16a34a; }
+    #fsr-wizard .btn-no { background: #ef4444; color: #fff; }
+    #fsr-wizard .btn-no:hover { background: #dc2626; }
+    #fsr-wizard .btn-sec { background: rgba(255,255,255,0.12); color: #fff; }
+    #fsr-wizard .btn-sec:hover { background: rgba(255,255,255,0.22); }
+    #fsr-wizard a { color: #7dd3fc; text-decoration: underline; }
+    #fsr-wizard a:hover { color: #bae6fd; }
+    #fsr-wizard .nav {
+      margin-top: 18px;
+      padding-top: 18px;
+      border-top: 1px solid rgba(255,255,255,0.1);
+      display: flex;
+      justify-content: space-between;
+    }
+    #fsr-wizard .nav button {
+      margin: 4px;
+      min-width: 100px;
+    }
+    #fsr-wizard .divider {
+      height: 1px;
+      background: rgba(255,255,255,0.1);
+      margin: 20px 0;
+    }
+    @media (max-width: 500px) {
+      #fsr-wizard { padding: 16px; }
+      #fsr-wizard h2 { font-size: 1.15em; margin-bottom: 20px; }
+      #fsr-wizard .btns { flex-direction: column; }
+      #fsr-wizard .btns button { width: 100%; min-width: auto; margin: 5px 0; }
+      #fsr-wizard .nav { flex-direction: row; }
+      #fsr-wizard .nav button { flex: 1; min-width: auto; }
+    }
+  </style>
+
+  <!-- Screen A: Intro -->
+  <div class="screen active" data-screen="A">
+    <h2>Quick Diagnosis</h2>
+    <p><strong>Common reasons FSR+ won't connect:</strong></p>
+    <ul>
+      <li>FSR+ service is not running</li>
+      <li>FSR+ port is in use by another application</li>
+      <li>Antivirus or security software is blocking FSR+</li>
+    </ul>
+    <div class="btns">
+      <button class="btn-primary" onclick="fsr.go('C')">Start Diagnosis</button>
+    </div>
+  </div>
+
+  <!-- Screen B: Check process -->
+  <div class="screen" data-screen="B">
+    <h2>Is the Service Running?</h2>
+    <p>Open <strong>Windows Task Manager</strong> (Ctrl + Shift + Esc), go to the <strong>Details</strong> tab, and look for:</p>
+    <div class="code-block">fsrealistic-plus.exe</div>
+    <p class="hint">Tip: Click the "Name" column header to sort alphabetically, or use the search box if available.</p>
+    <div class="divider"></div>
+    <p><strong>Found it running?</strong></p>
+    <div class="btns">
+      <button class="btn-yes" onclick="fsr.go('G')">Yes, It's Running</button>
+      <button class="btn-no" onclick="fsr.go('F-service')">No, Not Found</button>
+    </div>
+    <div class="nav">
+      <button class="btn-sec" onclick="fsr.back()">Back</button>
+      <button class="btn-sec" onclick="fsr.reset()">Start Over</button>
+    </div>
+  </div>
+
+  <!-- Screen C: Change port -->
+  <div class="screen" data-screen="C">
+    <h2>Try a Different Port</h2>
+    <ol>
+      <li>Close Microsoft Flight Simulator completely</li>
+      <li>Open the port file:
+        <div class="code-block">Community/rkapps-fsrealistic/html_ui/InGamePanels/FSRealistic/Port.js</div>
+      </li>
+      <li>Change the number in <span class="code">var WS_PORT = 62137;</span> to a different port, for example: <span class="code">var WS_PORT = 58297;</span></li>
+      <li>Save the file</li>
+      <li>Start MSFS and open the FSR+ in-game panel</li>
+    </ol>
+    <div class="btns">
+      <button class="btn-yes" onclick="fsr.go('E')">It Works Now</button>
+      <button class="btn-sec" onclick="fsr.go('B')">Still Not Working</button>
+    </div>
+    <div class="nav">
+      <button class="btn-sec" onclick="fsr.back()">Back</button>
+      <button class="btn-sec" onclick="fsr.reset()">Start Over</button>
+    </div>
+  </div>
+
+  <!-- Screen G: Antivirus / Security Software -->
+  <div class="screen" data-screen="G">
+    <h2>Check Antivirus / Security Software</h2>
+    <p>Some antivirus or security software may block FSR+ from running or listening for connections.</p>
+    <p><strong>Option 1 (Recommended):</strong></p>
+    <p>Add an exclusion in your antivirus/security software for:</p>
+    <div class="code-block">Community/rkapps-fsrealistic/service/fsrealistic-plus.exe</div>
+
+    <p style="margin-top:18px;"><strong>Option 2 (Quick Test):</strong></p>
+    <p>Temporarily disable your antivirus/security software to test if that's the issue.<br>
+    <em>(Remember to re-enable it afterwards!)</em></p>
+
+    <p class="hint">You may need to restart MSFS after making changes.</p>
+    <div class="btns">
+      <button class="btn-yes" onclick="fsr.go('E')">It Works Now</button>
+      <button class="btn-sec" onclick="fsr.go('F-help')">Still Not Working</button>
+    </div>
+    <div class="nav">
+      <button class="btn-sec" onclick="fsr.back()">Back</button>
+      <button class="btn-sec" onclick="fsr.reset()">Start Over</button>
+    </div>
+  </div>
+
+  <!-- Screen E: Success -->
+  <div class="screen" data-screen="E">
+    <h2>All Set!</h2>
+    <div class="box success">
+      <p style="text-align:center; font-size:1.05em;"><strong>FSR+ is connected. Enjoy your flight!</strong></p>
+    </div>
+    <div class="btns">
+      <button class="btn-primary" onclick="fsr.reset()">Start Over</button>
+    </div>
+  </div>
+
+  <!-- Screen F-service: Ticket (service not running) -->
+  <div class="screen" data-screen="F-service">
+    <h2>Service Not Running</h2>
+    <p>The FSR+ service didn't start automatically. Please open a support ticket so we can help.</p>
+    <div class="box">
+      <p><strong>Support website:</strong><br>
+      <a href="https://rkapps.shop" target="_blank">rkapps.shop</a></p>
+      <p style="margin-top:12px;"><strong>Please attach your log file:</strong></p>
+      <div class="code-block">Community/rkapps-fsrealistic/service/log.txt</div>
+    </div>
+    <div class="nav">
+      <button class="btn-sec" onclick="fsr.back()">Back</button>
+      <button class="btn-sec" onclick="fsr.reset()">Start Over</button>
+    </div>
+  </div>
+
+  <!-- Screen F-help: Ticket (nothing helped) -->
+  <div class="screen" data-screen="F-help">
+    <h2>Need More Help</h2>
+    <p>We couldn't resolve the issue with these steps. Please open a support ticket and we'll investigate further.</p>
+    <div class="box">
+      <p><strong>Support website:</strong><br>
+      <a href="https://rkapps.shop" target="_blank">rkapps.shop</a></p>
+      <p style="margin-top:12px;"><strong>Please attach your log file:</strong></p>
+      <div class="code-block">Community/rkapps-fsrealistic/service/log.txt</div>
+    </div>
+    <div class="nav">
+      <button class="btn-sec" onclick="fsr.back()">Back</button>
+      <button class="btn-sec" onclick="fsr.reset()">Start Over</button>
+    </div>
+  </div>
+
+  <script>
+    var fsr = {
+      history: ['A'],
+      go: function(id) {
+        this.setScreen(id);
+        this.history.push(id);
+      },
+      back: function() {
+        if (this.history.length > 1) {
+          this.history.pop();
+          this.setScreen(this.history[this.history.length - 1]);
+        }
+      },
+      reset: function() {
+        this.history = ['A'];
+        this.setScreen('A');
+      },
+      setScreen: function(id) {
+        var screens = document.querySelectorAll('#fsr-wizard .screen');
+        for (var i = 0; i < screens.length; i++) {
+          screens[i].classList.remove('active');
+          if (screens[i].getAttribute('data-screen') === id) {
+            screens[i].classList.add('active');
+          }
+        }
+      }
+    };
+  </script>
+</div>
+<!-- End FSRealistic+ Troubleshooting Wizard -->
+        </div>
+        <span id="noServicePort"></span>
+      </div>
+
+      <!-- No ChasePlane Screen -->
+      <div id="noChasePlane">
+        <div class="noChasePlane-content">
+          <img src="/images/chaseplane.png"
+            alt="ChasePlane Logo" 
+            class="chaseplane-logo">
+
+          <label class="chaseplane-label">
+            <b>FSRealistic+</b> Requires <b>ChasePlane</b>
+          </label>
+
+          <p class="chaseplane-note">
+            For the most realistic and immersive experience, use <b>FSRealistic+</b> with <b>ChasePlane</b>. 
+            If you'd rather go standalone, <b>FSRealistic Pro</b> is available.
+          </p>
+
+          <button type="button" id="buyChasePlaneButton" class="chaseplane-button">BUY CHASEPLANE</button>
+          <button type="button" id="rkAppsStoreButton" class="chaseplane-button">RKAPPS STORE</button>
+        </div>
+      </div>
+
+      <!-- ========================================
+           MAIN PANEL
+           ======================================== -->
+
+      <div id="FSRealisticPanelWrap">
+        
+        <!-- Update Notification Bar -->
+        <div class="update-bar" id="updateBar">⚠ UPDATE AVAILABLE</div>
+
+        <!-- Main Tab Navigation -->
+        <section id="TabSwitch">
+          <tab-menu id="TabMenu" class="Tabs" selectedIndex="0">
+            <tabmenu-item 
+              id="Effects" 
+              title="EFFECTS" 
+              subtitle="" 
+              metaData="" 
+              target="#Tab1"
+              class="condensed-interactive" 
+              tab-id="Tab1" 
+              eventOnValidate="effectsTabClick">
+            </tabmenu-item>
+            <tabmenu-item 
+              id="Profile" 
+              title="PROFILE" 
+              subtitle="" 
+              metaData="" 
+              target="#Tab2"
+              class="condensed-interactive" 
+              tab-id="Tab2" 
+              eventOnValidate="profileTabClick">
+            </tabmenu-item>
+            <tabmenu-item 
+              id="Settings" 
+              title="SETTINGS" 
+              subtitle="" 
+              metaData="" 
+              target="#Tab3"
+              class="condensed-interactive" 
+              tab-id="Tab3" 
+              eventOnValidate="settingsTabClick">
+            </tabmenu-item>
+          </tab-menu>
+        </section>
+
+        <!-- ========================================
+             TAB 1: EFFECTS
+             ======================================== -->
+
+        <section id="Tab1" class="tab">
+          <div class="effects-container">
+            
+           
+
+            <!-- Effects List -->
+            <div class="effects-list">
+
+
+              <div class="effect-list-filter">
+                <icon-button id="effectsFilterLeftArrow" class="effect-list-filter-select-arrow" data-url="/icons/Arrows_buttonLEFT.svg"></icon-button>
+                <label id="effectsFilterLbl">ALL</label>
+                <icon-button id="effectsFilterRightArrow" class="effect-list-filter-select-arrow" data-url="/icons/Arrows_buttonRIGHT.svg"></icon-button>
+              </div>
+
+
+              <div id="effectsList" style="overflow-y: auto; height: calc(100% - var(--height-60));"></div>
+            </div>
+            
+
+
+
+
+
+
+           <div class="sound-cloud-modal-background hidden" id="soundCloudModalBackground">
+  <div class="sound-cloud-modal">
+    
+
+
+      <div class="sound-cloud-top-nav">
+        <button class="sound-cloud-top-nav-btn" id="soundCloudCloseBtn">
+            BACK
+          </button>
+          <div class="sound-cloud-top-nav-title">SOUND CLOUD</div>
+      </div>
+
+<div class="sound-cloud-top-title">
+
+      <div class="sound-cloud-title" id="soundCloudTitle">LOADING...</div>
+
+      </div>
+
+    <!-- Header -->
+    <div class="sound-cloud-header">
+      
+      <!-- Tab Menu -->
+      <div class="sound-cloud-tabs">
+        <button class="sound-cloud-tab active" data-tab="my-library">INSTALLED</button>
+        <button class="sound-cloud-tab" data-tab="community">COMMUNITY</button>
+      </div>
+      
+      <!-- Controls -->
+      <div class="sound-cloud-controls">
+        <input 
+          type="text" 
+          class="sound-cloud-search" 
+          id="soundCloudSearch" 
+          placeholder="Search...">
+        
+        <!-- Custom Dropdown for Sort -->
+        <div class="sound-cloud-dropdown" id="soundSortDropdown">
+          <div class="sound-cloud-dropdown-selected">
+            <span id="soundSortSelected">Sort by: Downloads</span>
+            <span class="sound-cloud-dropdown-arrow">▼</span>
+          </div>
+          <div class="sound-cloud-dropdown-options">
+            <div class="sound-cloud-dropdown-option selected" data-value="downloads">Sort by: Downloads</div>
+            <div class="sound-cloud-dropdown-option" data-value="rating">Sort by: Rating</div>
+            <div class="sound-cloud-dropdown-option" data-value="newest">Sort by: Newest</div>
+          </div>
+        </div>
+        
+        <icon-button class="sound-cloud-upload-btn" id="soundCloudUploadBtn" data-url="/icons/controls/ICON_TOOLBAR_ADD.svg"></icon-button>
+      </div>
+    </div>
+    
+    <!-- Body (Sound Cards) -->
+    <div class="sound-cloud-body" id="soundCloudBody">
+      <div class="sound-cards-container" id="soundCardsContainer">
+        <label class="sound-cloud-empty" id="soundCloudLoading">Loading sounds...</label>
+      </div>
+    </div>
+    
+    <!-- Footer -->
+
+    
+  </div>
+</div>
+
+<div class="upload-sound-modal-background hidden" id="uploadSoundModalBackground">
+  <div class="upload-sound-modal">
+
+
+    <!-- Message Bar -->
+
+
+    <!-- Body -->
+    <div class="upload-sound-body">
+
+
+
+      <div class="sound-cloud-top-nav">
+        <button class="sound-cloud-top-nav-btn" id="uploadSoundCancelBtn">
+            BACK
+          </button>
+          <div class="sound-cloud-top-nav-title" id="uploadNewSoundTitle">CREATE SOUND</div>
+      </div>
+
+    <div class="upload-message-bar hidden" id="uploadMessageBar">
+      <span class="upload-message-text" id="uploadMessageText"></span>
+    </div>
+
+
+      <div class="upload-form-section">
+
+
+
+        <div class="upload-form-group2">
+          <input type="text" id="uploadSoundName" class="upload-input" style="margin-right: var(--spacing-20);"
+            maxlength="25" placeholder="Sound name">
+          <input type="text" id="uploadSoundAuthor" class="upload-input" maxlength="50" placeholder="Author name">
+
+        </div>
+
+        <div class="upload-form-group">
+          <input type="text" id="uploadDescription" class="upload-input" maxlength="200" placeholder="Sound description"></input>
+        </div>
+
+        <div class="upload-form-group">
+          <div id="effectSelector"></div>
+        </div>
+
+        <div class="upload-form-group2">
+
+          <label class="upload-checkbox-container">
+            <input type="checkbox" id="uploadIsPublic" checked>
+            <span class="upload-checkbox-checkmark"></span>
+            <span class="upload-checkbox-text">Share with community</span>
+          </label>
+
+          <div class="upload-file-selector">
+            <div class="upload-file-display" id="uploadFilePathDisplay">No file selected</div>
+            <button type="button" id="uploadSelectFileBtn" class="upload-select-file-btn">
+              BROWSE
+            </button>
+          </div>
+
+
+        </div>
+
+        <div class="load-sound-modal-center">
+          <label class="load-sound-modal-title">
+            SOUND REQUIREMENTS
+          </label>
+
+          <label class="load-sound-modal-requirements">
+            Audio file type Ogg, mono, minimum 5 seconds of silence before and after every sound.
+          </label>
+
+          <label class="copyrights-disclaimer" id="copyrightsoundlbl">Only upload sounds you created or have rights to
+            use.</label>
+
+          <img class="load-sound-modal-photo" src="/images/custom_sound_segmented_rules.png">
+
+                     <button class="upload-submit-button" id="uploadSoundSubmitBtn">
+            UPLOAD
+          </button>
+
+        </div>
+
+
+ 
+       
+
+
+      </div>
+
+    </div>
+
+  </div>
+</div>
+
+
+
+            <!-- Effect Info Panel -->
+            <div class="effect-info" id="effectInfo">
+
+              <!-- Effect Header -->
+              <div class="effect-image-wrapper">
+                <img id="effectImage" class="effect-image" src="/icons/general.svg" alt="Effect icon">
+              </div>
+              
+              <div class="effect-header">
+                <label id="effectTitle" class="effect-title"></label>
+                <button type="button" class="test-button" id="testButton">TEST</button>
+                <button type="button" class="effect-toggle-button" id="effectToggleButton">ON</button>
+              </div>
+
+              
+
+
+
+
+              <!-- Effect Options Scroller -->
+              <div class="effect-options-scroller">
+                <div id="effectTestSettings" class="effect-description"></div>
+                <div id="effectDescription" class="effect-description"></div>
+                <div id="effectOptions"></div>
+                
+                <!-- Effect Sub-Navigation -->
+                <section id="TabSwitchEffect">
+                  <tab-menu id="EffectTabMenu" class="Tabs" selectedIndex="0">
+                    <tabmenu-item 
+                      id="CameraEffect" 
+                      title="CAMERA" 
+                      subtitle="" 
+                      metaData="" 
+                      target="#CameraOptions"
+                      class="condensed-interactive" 
+                      tab-id="CameraOptions"
+                      eventOnValidate="cameraOptionsClick">
+                    </tabmenu-item>
+                    <tabmenu-item 
+                      id="SoundEffects" 
+                      title="SOUND" 
+                      subtitle="" 
+                      metaData="" 
+                      target="#SoundOptions"
+                      class="condensed-interactive" 
+                      tab-id="SoundOptions"
+                      eventOnValidate="soundOptionsClick">
+                    </tabmenu-item>
+                    <tabmenu-item 
+                      id="CPOptions" 
+                      title="CHASEPLANE" 
+                      subtitle="" 
+                      metaData="" 
+                      target="#CPptions"
+                      class="condensed-interactive" 
+                      tab-id="CPOptions" 
+                      eventOnValidate="CPOptionsClick">
+                    </tabmenu-item>
+                  </tab-menu>
+                </section>
+
+                <!-- Camera Options -->
+                <section id="CameraOptions" class="tab">
+                  <div id="effectCameraOptions"></div>
+                </section>
+
+                <!-- Sound Options -->
+                <section id="SoundOptions" class="tab">
+                  <div id="effectSoundOptions"></div>
+                </section>
+
+                <!-- ChasePlane Options -->
+                <section id="CPptions" class="tab">
+                  
+                  <label class="chaseplane-description">
+                    Choose how this effect applies to ChasePlane camera modes and their groups.
+                  </label>
+
+                  <!-- ChasePlane Sub-Navigation -->
+                  <section id="TabSwitchEffect">
+                    <tab-menu id="CPTabMenu" class="Tabs" selectedIndex="0">
+                      <tabmenu-item 
+                        id="CameraEffect" 
+                        title="INTERNAL" 
+                        subtitle="" 
+                        metaData="" 
+                        target="#INTERNAL"
+                        class="condensed-interactive" 
+                        tab-id="INTERNAL"
+                        eventOnValidate="cameraOptionsClick">
+                      </tabmenu-item>
+                      <tabmenu-item 
+                        id="SoundEffects" 
+                        title="EXTERNAL" 
+                        subtitle="" 
+                        metaData="" 
+                        target="#EXTERNAL"
+                        class="condensed-interactive" 
+                        tab-id="EXTERNAL"
+                        eventOnValidate="soundOptionsClick">
+                      </tabmenu-item>
+                      <tabmenu-item 
+                        id="CPOptions" 
+                        title="WORLD" 
+                        subtitle="" 
+                        metaData="" 
+                        target="#WORLD"
+                        class="condensed-interactive" 
+                        tab-id="WORLD" 
+                        eventOnValidate="CPOptionsClick">
+                      </tabmenu-item>
+                    </tab-menu>
+                  </section>
+
+                  <!-- Internal Camera Settings -->
+                  <section id="INTERNAL" class="tab">
+                    <div id="CPEffectInternal" class="chaseplane-effect-settings"></div>
+                  </section>
+
+                  <!-- External Camera Settings -->
+                  <section id="EXTERNAL" class="tab">
+                    <div id="CPEffectExternal" class="chaseplane-effect-settings"></div>
+                  </section>
+
+                  <!-- World Camera Settings -->
+                  <section id="WORLD" class="tab">
+                    <div id="CPEffectWorld" class="chaseplane-effect-settings"></div>
+                  </section>
+
+                </section>
+
+              </div>
+           
+           
+           
+           
+            </div>
+          </div>
+        </section>
+
+        <!-- ========================================
+             TAB 2: PROFILE
+             ======================================== -->
+
+        <section id="Tab2" class="tab">
+          <div class="profile-page">
+            
+
+            <div class="profile-name">
+             <label class="profile-name-title" id="profileName"></label>
+            </div>
+
+            <!-- Profile Options -->
+            <div class="profile-options">
+              
+              <!-- Left Column -->
+              <div class="profile-options-left">
+                <div class="profile-option">
+                  <label class="profile-option-title">Master Switch</label>
+                  <button type="button" class="profile-option-button-master-switch" id="profileMasterSwitch">ON</button>
+                </div>
+                <div class="profile-option">
+                  <label class="profile-option-title">Reset to Defaults</label>
+                  <button type="button" class="profile-option-button-reset" id="resetProfileToDefaults">RESET</button>
+                </div>
+              </div>
+              
+              <!-- Right Column -->
+              <div class="profile-options-right">
+                <div class="profile-option">
+                  <label class="profile-option-title">Copy from Profile</label>
+                  <button type="button" class="profile-option-button" id="copyProfileBtn">COPY</button>
+                </div>
+                <div class="profile-option">
+                  <label class="profile-option-title">Share to Cloud</label>
+                  <button type="button" class="profile-option-button" id="shareToCloudButton">SHARE</button>
+                </div>
+              </div>
+
+            </div>
+            <!-- Cockpit Door Offset -->
+            <div class="cockpit-door-offset-container">
+              <label class="profile-door-option-title" data-tooltip="This setting applies only to aircraft with a cabin door. Some sound effects need to know its position for accurate spatial audio. Set the slider to zero to follow the placement instructions.">
+                Cockpit Door Offset<span class="help-icon">?</span>
+              </label>
+<div id="cockpitDoorOffsetSlider" class="custom-slider-standalone" 
+     style="width: 70% !important; min-width: 370px;"
+     data-min="0" 
+     data-max="100" 
+     data-value="0"
+     data-step="1">
+  <div class="custom-slider-track"></div>
+  <div class="custom-slider-thumb"></div>
+</div>
+            </div>
+
+            <!-- Cloud Profiles -->
+            <!-- Cloud Profiles -->
+
+
+            
+<div class="profiles-cloud">
+  <div class="profile-header" id="profile-header">
+    <div class="sortable" data-column="author">Author</div>
+    <div class="sortable" data-column="description">Description</div>
+    <div class="sortable" data-column="downloads">Downloads</div>
+    <div>
+      <icon-button id="sharedProfilesSearchOpen" class="search-button" data-url="/icons/freeflight/worldMap_Search.svg"></icon-button>
+    </div>
+  </div>
+ <div class="profile-header-search" id="profile-header-search">
+  <input type="text" id="sharedProfileSearchInput" class="profile-header-search-input" maxlength="25" placeholder="Type to search..." required />
+  <icon-button id="sharedProfilesSearchClose" class="search-button" data-url="/icons/toolbar/ICON_TOOLBAR_CLOSE.svg"></icon-button>
+</div>
+  <div class="profiles-list" id="profiles-list"></div>
+</div>
+          </div>
+        </section>
+
+        <!-- ========================================
+             TAB 3: SETTINGS
+             ======================================== -->
+
+        <section id="Tab3" class="tab">
+          <div class="settings-page">
+
+            <!-- About/Status Section -->
+            <div class="about-top-section">
+              
+              <!-- Left Side: Version & License -->
+              <div class="about-top-section-left">
+                <div class="about-option">
+                  <label class="about-option-title-left">Version</label>
+                  <label class="about-option-title-right" id="currentVersionLabel">1.0.0</label>
+                </div>
+                <div class="about-option">
+                  <label class="about-option-title-left">License</label>
+                  <label id="licenseTypeLable" class="about-option-title-right">Activated</label>
+                </div>
+                <div class="about-option">
+                  <button type="button" class="settings-update-button" id="updateVersionBtn">UPDATE</button>
+                  <button type="button" class="settings-activate-button" id="activateTrialSettingsBtn">ACTIVATE</button>
+                </div>
+              </div>
+              
+              <!-- Right Side: Status Indicators -->
+              <div class="about-top-section-right">
+                <div class="about-option">
+                  <label class="status-option-title">FSRealistic Service</label>
+                  <div class="status-circle-pulse "></div>
+                </div>
+                <div class="about-option">
+                  <label class="status-option-title">rkApps Servers</label>
+                  <div class="status-circle-pulse "></div>
+                </div>
+                <div class="about-option">
+                  <label class="status-option-title">ChasePlane Integration</label>
+                  <div class="status-circle-pulse "></div>
+                </div>
+              </div>
+              
+            </div>
+
+            <div class="settings-options-first">
+
+              <!-- Output Device Setting -->
+              <div class="settings-option">
+                <label class="settings-option-title" data-tooltip="When you fly an aircraft for the first time, it loads the rkApps default profile for that aircraft type. You can change this to one of your saved profiles, which will then be used as the default for that aircraft type going forward.">Default Profiles<span class="help-icon">?</span></label>
+                <drop-down id="acTypesDropdown" class="outputs-dropdown"></drop-down>
+              </div>
+
+              <!-- Master Volume Setting -->
+              <div class="settings-option">
+                <label class="settings-option-title"></label>
+                <drop-down id="existingProfilesDropdown" class="outputs-dropdown"></drop-down>
+              </div>
+            </div>
+
+
+
+            <!-- Primary Settings -->
+            <div class="settings-options-first">
+
+              <!-- Output Device Setting -->
+              <div class="settings-option">
+                <label class="settings-option-title">Output Device</label>
+                <drop-down id="outputsDrop" class="outputs-dropdown"></drop-down>
+              </div>
+
+              <!-- Master Volume Setting -->
+              <div class="settings-option">
+                <label class="settings-option-title">Master Volume</label>      
+                <div id="masterVolumeSlider" class="custom-slider" 
+                    data-min="0" 
+                    data-max="100" 
+                    data-value="0"
+                    data-step="1">
+                  <div class="custom-slider-track"></div>
+                  <div class="custom-slider-thumb"></div>
+                </div>
+              </div>
+
+            </div>
+
+            <!-- Secondary Settings -->
+            <div class="settings-options-second">
+
+              <!-- Disabled Effects Setting -->
+              <div class="settings-option" style="margin-bottom: var(--spacing-40)">
+                <label class="settings-option-title" data-tooltip="Select the effects you want to always disable globally, across all aircraft.">
+                  Disabled effects<span class="help-icon">?</span>
+                </label>
+                <drop-down id="disabledEffectsDrop" class="disabled-effects-dropdown"></drop-down>
+              </div>
+
+              <!-- Settings Options Grid -->
+              <div class="settings-options">
+                
+                <!-- Left Column --> 
+                <div class="settings-options-left">
+                  <div class="settings-option">
+                    <label class="settings-option-title">Announce Connection</label>
+                    <button type="button" class="settings-option-button-announce-connection" id="announceConnectionButton">ON</button>
+                  </div>
+                      <div class="settings-option">
+                    <label class="settings-option-title" data-tooltip="Please click only if instructed by rkApps support.">Send Logs<span class="help-icon">?</span></label>
+                    <button type="button" class="settings-option-button-debug-mode" id="clientDebugBtn">SEND</button>
+                  </div>
+                </div>
+                
+                <!-- Right Column -->
+                <div class="settings-options-right">
+                  
+
+                  
+                  <!-- Debug Mode Setting -->
+                  <div class="settings-option">
+                    <label class="settings-option-title">Mute in Background</label>
+                    <button type="button" class="settings-option-button-mute-mode" id="muteInBackGroundBtn">OFF</button>
+                  </div>
+
+                                    <!-- Camera Effects FPS Setting -->
+             
+                   <div class="settings-option">
+                    <label class="settings-option-title" data-tooltip="Please click only if instructed by rkApps support.">Restart Service<span class="help-icon">?</span></label>
+                    <button type="button" class="settings-option-button-debug-mode" id="restartServiceBtn">RESTART</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- External Links Section -->
+            <div class="about-middle-section">
+              
+              <!-- First Row of Links -->
+              <div class="about-middle-section-buttons" style="padding-right: var(--spacing-40); padding-left: var(--spacing-40); padding-top: var(--spacing-40); padding-bottom: var(--spacing-10);">
+                <div class="about-option">
+                  <button type="button" class="about-option-button" id="aboutLinkBtn" url="rkapps_store">RKAPPS STORE</button>
+                  <button type="button" class="about-option-button" id="aboutLinkBtn" url="42_store">//42 STORE</button>
+                  <button type="button" class="about-option-button" id="aboutLinkBtn" url="discord">DISCORD</button>
+                </div>
+              </div>
+              
+              <!-- Second Row of Links -->
+              <div class="about-middle-section-buttons" style="padding-right: var(--spacing-40); padding-left: var(--spacing-40); padding-top: var(--spacing-10); padding-bottom: var(--spacing-40);">
+                <div class="about-option">
+                  <button type="button" class="about-option-button" id="aboutLinkBtn" url="tutorial">TUTORIAL</button>
+                  <button type="button" class="about-option-button" id="aboutLinkBtn" url="support">SUPPORT</button>
+                  <button type="button" class="about-option-button" id="aboutLinkBtn" url="eula">EULA</button>
+                </div>
+              </div>
+              
+            </div>
+
+          </div>
+        </section>
+
+      </div>
+      
+      <!-- Tooltip -->
+      <div id="tooltip" class="tooltip"></div>
+
+    </ingame-ui>
+  </ingamepanel-custom>
+</body>
+
+</html>
