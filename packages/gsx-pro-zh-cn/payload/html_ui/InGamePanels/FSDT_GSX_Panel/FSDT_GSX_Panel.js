@@ -1,4 +1,4 @@
-/* GSX Pro 4.0.14 Simplified Chinese patch v1.0.0. */
+/* GSX Pro 4.0.14 Simplified Chinese patch v1.1.0. */
 var GSX_ZH_CN = (function initGsxChinese(root, factory) {
   const api = factory();
 
@@ -437,8 +437,11 @@ var GSX_ZH_CN = (function initGsxChinese(root, factory) {
     match = value.match(/^(\d+\s*-\s*)Option\s+(\d+)$/i);
     if (match) return `${match[1]}选项 ${match[2]}`;
 
-    match = value.match(/^(.+?) \((\d+) suitable parkings?\)$/i);
+    match = value.match(/^([\s\S]*?)\s*\(\s*(\d+)\s+suitable\s+parkings?\s*\)$/i);
     if (match) return `${translatePhraseList(match[1])}（${match[2]} 个适用停机位）`;
+
+    match = value.match(/^(\s*[^A-Za-z0-9]*\s*)Runway\s+(.+?)\s+Start$/i);
+    if (match) return `${match[1]}跑道 ${match[2]} 起点`;
 
     match = value.match(/^Our (.+?) is Parked$/i);
     if (match) return `本机 ${match[1]} 已停稳`;
@@ -506,7 +509,8 @@ var GSX_ZH_CN = (function initGsxChinese(root, factory) {
   function decodeLookupEntities(value) {
     return value
       .replace(/&(quot|#34|#x22);/gi, '"')
-      .replace(/&(apos|#39|#x27);/gi, "'");
+      .replace(/&(apos|#39|#x27);/gi, "'")
+      .replace(/&nbsp;/gi, " ");
   }
 
   function translateText(value) {
