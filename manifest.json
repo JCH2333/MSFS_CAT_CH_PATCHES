@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
-  "catalogVersion": "2026.08.08.3",
-  "updatedAt": "2026-08-08T00:00:00Z",
+  "catalogVersion": "2026.08.08.4",
+  "updatedAt": "2026-08-08T01:00:00Z",
   "patches": [
     {
       "id": "fsrealistic-plus-zh-cn",
@@ -47,6 +47,30 @@
         "assetName": "msfs-cat-ch-gsx-pro-zh-cn-v1.1.0.zip",
         "sha256": "04d3eb91cd7934b88c2788ea3d470813a28af36629658786905b803b58ed4d88",
         "size": 418861,
+        "contentRoot": ""
+      }
+    },
+    {
+      "id": "chaseplane-zh-cn",
+      "name": "ChasePlane 简体中文",
+      "summary": "ChasePlane 26.18.5 主面板、相机控制与配置界面简体中文补丁",
+      "version": "1.0.0",
+      "addonVersion": "26.18.5",
+      "status": "published",
+      "compatibility": ["MSFS 2024"],
+      "targetHint": "请选择 p42-util-chaseplane 安装目录",
+      "targetFolders": ["p42-util-chaseplane"],
+      "releaseNotes": ["首次发布", "覆盖主面板、相机、控制、配置文件与动态提示文字"],
+      "fingerprint": [
+        { "relativePath": "layout.json", "sha256": "ef04ec26eb3b866b17acdc5ac8906caca5558d4f147fd2fc1f652640a28bfba1" },
+        { "relativePath": "HTML_UI/InGamePanels/P42ChasePlane/P42ChasePlane.html", "sha256": "678b5efc47e229ae48d01991e3863f7c9a1290cf70b7e82343892f7a4fab31db" },
+        { "relativePath": "HTML_UI/InGamePanels/P42ChasePlane/ChasePlane.zh-CN.js", "sha256": "b9408bf7e663740e9c8a49e5dc8c12353f34a6fcdbc62d44a01d204923b50506" }
+      ],
+      "package": {
+        "releaseTag": "chaseplane-zh-cn-v1.0.0",
+        "assetName": "msfs-cat-ch-chaseplane-zh-cn-v1.0.0.zip",
+        "sha256": "258dd7d78b234cdb2c1aac66d843f22e7fc9cfaafa543d5151a5ee3b009e3d58",
+        "size": 25088,
         "contentRoot": ""
       }
     }
