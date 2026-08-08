@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
-  "catalogVersion": "2026.08.08.4",
-  "updatedAt": "2026-08-08T01:00:00Z",
+  "catalogVersion": "2026.08.08.5",
+  "updatedAt": "2026-08-08T14:00:00Z",
   "patches": [
     {
       "id": "fsrealistic-plus-zh-cn",
@@ -10,14 +10,30 @@
       "version": "1.1.0",
       "addonVersion": "1.1.9",
       "status": "published",
-      "compatibility": ["MSFS 2024"],
+      "compatibility": [
+        "MSFS 2024"
+      ],
       "targetHint": "请选择 rkapps-fsrealistic 安装目录",
-      "targetFolders": ["rkapps-fsrealistic"],
-      "releaseNotes": ["首次发布", "覆盖主面板、设置、效果名称、提示与诊断窗口"],
+      "targetFolders": [
+        "rkapps-fsrealistic"
+      ],
+      "releaseNotes": [
+        "首次发布",
+        "覆盖主面板、设置、效果名称、提示与诊断窗口"
+      ],
       "fingerprint": [
-        { "relativePath": "layout.json", "sha256": "9e110c0faa621f986281a976d81d309cbe9a8c3cc8b01db590c1fd82a05bc1aa" },
-        { "relativePath": "html_ui/InGamePanels/FSRealistic/FSRealistic.html", "sha256": "1cf60e214dd2c685b64dee66c45062fd13719772af8a03ae466d5acf58f5f94e" },
-        { "relativePath": "html_ui/InGamePanels/FSRealistic/FSRealistic.zh-CN.js", "sha256": "b4938e1d3fe27298a8910d6e0308a5fe57194b17aa2efec3e2e7d45754f3789a" }
+        {
+          "relativePath": "layout.json",
+          "sha256": "9e110c0faa621f986281a976d81d309cbe9a8c3cc8b01db590c1fd82a05bc1aa"
+        },
+        {
+          "relativePath": "html_ui/InGamePanels/FSRealistic/FSRealistic.html",
+          "sha256": "1cf60e214dd2c685b64dee66c45062fd13719772af8a03ae466d5acf58f5f94e"
+        },
+        {
+          "relativePath": "html_ui/InGamePanels/FSRealistic/FSRealistic.zh-CN.js",
+          "sha256": "b4938e1d3fe27298a8910d6e0308a5fe57194b17aa2efec3e2e7d45754f3789a"
+        }
       ],
       "package": {
         "releaseTag": "fsrealistic-plus-zh-cn-v1.1.0",
@@ -30,47 +46,77 @@
     {
       "id": "gsx-pro-zh-cn",
       "name": "GSX Pro 简体中文",
-      "summary": "GSX Pro 4.0.14 菜单、设置与运行状态简体中文补丁",
-      "version": "1.1.0",
-      "addonVersion": "4.0.14",
+      "summary": "GSX Pro 4.0.15 菜单、设置与运行状态简体中文补丁",
+      "version": "1.2.0",
+      "addonVersion": "4.0.15",
       "status": "published",
-      "compatibility": ["MSFS 2020", "MSFS 2024"],
+      "compatibility": [
+        "MSFS 2020",
+        "MSFS 2024"
+      ],
       "targetHint": "请选择 fsdreamteam-gsx-pro 安装目录",
-      "targetFolders": ["fsdreamteam-gsx-pro"],
-      "releaseNotes": ["首次发布", "覆盖主菜单、设置、SimBrief 与启动状态文字"],
+      "targetFolders": [
+        "fsdreamteam-gsx-pro"
+      ],
+      "releaseNotes": [
+        "适配 GSX Pro 4.0.15",
+        "保留 4.0.15 官方面板逻辑并监听动态文本"
+      ],
       "fingerprint": [
-        { "relativePath": "layout.json", "sha256": "416bf361fec98bd972e3d20dc81fa467c4f44a29ae48e0f7a081301c22a9b399" },
-        { "relativePath": "html_ui/InGamePanels/FSDT_GSX_Panel/FSDT_GSX_Panel.js", "sha256": "1b6a9f540aa5bb842dc785160a91a8e0f663b78fab6a7e5758e8af9c6b895f9d" }
+        {
+          "relativePath": "layout.json",
+          "sha256": "510cc17460e0c94ebb72ccd9a56c371af20f5e7e31dbbeb6440037ac2276ef59"
+        },
+        {
+          "relativePath": "html_ui/InGamePanels/FSDT_GSX_Panel/FSDT_GSX_Panel.js",
+          "sha256": "1f95f9a75132bebb9234838c8ca901936cab14e02be99e89e14d6e48619aaef7"
+        }
       ],
       "package": {
-        "releaseTag": "gsx-pro-zh-cn-v1.1.0",
-        "assetName": "msfs-cat-ch-gsx-pro-zh-cn-v1.1.0.zip",
-        "sha256": "04d3eb91cd7934b88c2788ea3d470813a28af36629658786905b803b58ed4d88",
-        "size": 418861,
+        "releaseTag": "gsx-pro-zh-cn-v1.2.0",
+        "assetName": "msfs-cat-ch-gsx-pro-zh-cn-v1.2.0.zip",
+        "sha256": "83191e180a1ef5faace62877b386c95551e3d4574c5086854ead57237dcfad24",
+        "size": 420148,
         "contentRoot": ""
       }
     },
     {
       "id": "chaseplane-zh-cn",
       "name": "ChasePlane 简体中文",
-      "summary": "ChasePlane 26.18.5 主面板、相机控制与配置界面简体中文补丁",
-      "version": "1.0.0",
-      "addonVersion": "26.18.5",
+      "summary": "ChasePlane 26.32.4 主面板、相机控制与配置界面简体中文补丁",
+      "version": "1.1.0",
+      "addonVersion": "26.32.4",
       "status": "published",
-      "compatibility": ["MSFS 2024"],
+      "compatibility": [
+        "MSFS 2024"
+      ],
       "targetHint": "请选择 p42-util-chaseplane 安装目录",
-      "targetFolders": ["p42-util-chaseplane"],
-      "releaseNotes": ["首次发布", "覆盖主面板、相机、控制、配置文件与动态提示文字"],
+      "targetFolders": [
+        "p42-util-chaseplane"
+      ],
+      "releaseNotes": [
+        "适配 ChasePlane 26.32.4",
+        "保留新版本主面板结构并加载动态汉化脚本"
+      ],
       "fingerprint": [
-        { "relativePath": "layout.json", "sha256": "ef04ec26eb3b866b17acdc5ac8906caca5558d4f147fd2fc1f652640a28bfba1" },
-        { "relativePath": "HTML_UI/InGamePanels/P42ChasePlane/P42ChasePlane.html", "sha256": "678b5efc47e229ae48d01991e3863f7c9a1290cf70b7e82343892f7a4fab31db" },
-        { "relativePath": "HTML_UI/InGamePanels/P42ChasePlane/ChasePlane.zh-CN.js", "sha256": "b9408bf7e663740e9c8a49e5dc8c12353f34a6fcdbc62d44a01d204923b50506" }
+        {
+          "relativePath": "layout.json",
+          "sha256": "8546652f8f04f4c67a669089a999e3f13d56605dab89e57003eb01304e011962"
+        },
+        {
+          "relativePath": "HTML_UI/InGamePanels/P42ChasePlane/P42ChasePlane.html",
+          "sha256": "d0d17cfaff2349bb993d6a7a45d58f3b22a0bc97d8802e0bda18f6e258a6faf1"
+        },
+        {
+          "relativePath": "HTML_UI/InGamePanels/P42ChasePlane/ChasePlane.zh-CN.js",
+          "sha256": "b9408bf7e663740e9c8a49e5dc8c12353f34a6fcdbc62d44a01d204923b50506"
+        }
       ],
       "package": {
-        "releaseTag": "chaseplane-zh-cn-v1.0.0",
-        "assetName": "msfs-cat-ch-chaseplane-zh-cn-v1.0.0.zip",
-        "sha256": "258dd7d78b234cdb2c1aac66d843f22e7fc9cfaafa543d5151a5ee3b009e3d58",
-        "size": 25088,
+        "releaseTag": "chaseplane-zh-cn-v1.1.0",
+        "assetName": "msfs-cat-ch-chaseplane-zh-cn-v1.1.0.zip",
+        "sha256": "b7b38124347b1c7a675f3cdfd73e253dbedab7c2b6227632df64eb8f71aa7b83",
+        "size": 25087,
         "contentRoot": ""
       }
     }
