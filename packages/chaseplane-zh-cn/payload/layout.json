@@ -8,1322 +8,1302 @@
     {
       "path": "html_ui/icons/toolbar/p42_panel_chaseplane.svg",
       "size": 3451,
-      "date": 134221080990000000
+      "date": 134305155490000000
     },
     {
       "path": "html_ui/icons/toolbar/p42_panel_chaseplane_overlay.svg",
-      "size": 2898,
-      "date": 134212794060000000
+      "size": 4243,
+      "date": 134297194630000000
     },
     {
       "path": "html_ui/ingamepanels/p42chaseplane/beta_min_sim_build.txt",
       "size": 9,
-      "date": 134221080990000000
-    },
-    {
-      "path": "html_ui/ingamepanels/p42chaseplane/branch.txt",
-      "size": 14,
-      "date": 134221080990000000
+      "date": 134305155490000000
     },
     {
       "path": "html_ui/ingamepanels/p42chaseplane/configs/control_events.json",
       "size": 20067,
-      "date": 134221080990000000
+      "date": 134305155490000000
     },
     {
       "path": "html_ui/ingamepanels/p42chaseplane/configs/default_view_options.json",
       "size": 633,
-      "date": 134221080990000000
+      "date": 134305155490000000
     },
     {
       "path": "html_ui/ingamepanels/p42chaseplane/configs/keyboard_naming.json",
       "size": 2585,
-      "date": 134221080990000000
+      "date": 134305155490000000
     },
     {
       "path": "html_ui/ingamepanels/p42chaseplane/css/app.css",
-      "size": 137965,
-      "date": 134221080990000000
+      "size": 138138,
+      "date": 134305155490000000
     },
     {
       "path": "html_ui/ingamepanels/p42chaseplane/distro.txt",
       "size": 5,
-      "date": 134221080990000000
+      "date": 134305155490000000
     },
     {
       "path": "html_ui/ingamepanels/p42chaseplane/img/add.svg",
       "size": 437,
-      "date": 134221080990000000
+      "date": 134305155490000000
     },
     {
       "path": "html_ui/ingamepanels/p42chaseplane/img/art/avatar_bush_wild.png",
       "size": 3763628,
-      "date": 134221080990000000
+      "date": 134305155490000000
     },
     {
       "path": "html_ui/ingamepanels/p42chaseplane/img/axis_alt.svg",
       "size": 1790,
-      "date": 134221080990000000
+      "date": 134305155490000000
     },
     {
       "path": "html_ui/ingamepanels/p42chaseplane/img/axis_distance.svg",
       "size": 838,
-      "date": 134221080990000000
+      "date": 134305155490000000
     },
     {
       "path": "html_ui/ingamepanels/p42chaseplane/img/axis_roll.svg",
       "size": 3272,
-      "date": 134221080990000000
+      "date": 134305155490000000
     },
     {
       "path": "html_ui/ingamepanels/p42chaseplane/img/axis_rotate.svg",
       "size": 2264,
-      "date": 134221080990000000
+      "date": 134305155490000000
     },
     {
       "path": "html_ui/ingamepanels/p42chaseplane/img/axis_translate.svg",
       "size": 2702,
-      "date": 134221080990000000
+      "date": 134305155490000000
     },
     {
       "path": "html_ui/ingamepanels/p42chaseplane/img/axis_zoom.svg",
       "size": 1619,
-      "date": 134221080990000000
+      "date": 134305155490000000
     },
     {
       "path": "html_ui/ingamepanels/p42chaseplane/img/back.svg",
       "size": 723,
-      "date": 134221080990000000
+      "date": 134305155490000000
     },
     {
       "path": "html_ui/ingamepanels/p42chaseplane/img/backup_export.svg",
       "size": 957,
-      "date": 134221080990000000
+      "date": 134305155490000000
     },
     {
       "path": "html_ui/ingamepanels/p42chaseplane/img/backup_import.svg",
       "size": 971,
-      "date": 134221080990000000
+      "date": 134305155490000000
     },
     {
       "path": "html_ui/ingamepanels/p42chaseplane/img/backup_path.svg",
       "size": 1346,
-      "date": 134221080990000000
+      "date": 134305155490000000
     },
     {
       "path": "html_ui/ingamepanels/p42chaseplane/img/binoculars.png",
       "size": 2660111,
-      "date": 134221080990000000
+      "date": 134305155490000000
     },
     {
       "path": "html_ui/ingamepanels/p42chaseplane/img/bolt.svg",
       "size": 380,
-      "date": 134221080990000000
+      "date": 134305155490000000
     },
     {
       "path": "html_ui/ingamepanels/p42chaseplane/img/brain.svg",
       "size": 1541,
-      "date": 134221080990000000
+      "date": 134305155490000000
     },
     {
       "path": "html_ui/ingamepanels/p42chaseplane/img/broken.svg",
       "size": 4854,
-      "date": 134221080990000000
+      "date": 134305155490000000
     },
     {
       "path": "html_ui/ingamepanels/p42chaseplane/img/cameras.svg",
       "size": 438,
-      "date": 134221080990000000
+      "date": 134305155490000000
     },
     {
       "path": "html_ui/ingamepanels/p42chaseplane/img/categories.svg",
       "size": 412,
-      "date": 134221080990000000
+      "date": 134305155490000000
     },
     {
       "path": "html_ui/ingamepanels/p42chaseplane/img/certificate.svg",
       "size": 2662,
-      "date": 134221080990000000
+      "date": 134305155490000000
     },
     {
       "path": "html_ui/ingamepanels/p42chaseplane/img/certificate1.svg",
       "size": 804,
-      "date": 134221080990000000
+      "date": 134305155490000000
     },
     {
       "path": "html_ui/ingamepanels/p42chaseplane/img/change.svg",
       "size": 941,
-      "date": 134221080990000000
+      "date": 134305155490000000
     },
     {
       "path": "html_ui/ingamepanels/p42chaseplane/img/changelog/eouruh8.jpg",
       "size": 61075,
-      "date": 134221080990000000
+      "date": 134305155490000000
     },
     {
       "path": "html_ui/ingamepanels/p42chaseplane/img/changelog/j79ecsh.jpg",
       "size": 37823,
-      "date": 134221080990000000
+      "date": 134305155490000000
     },
     {
       "path": "html_ui/ingamepanels/p42chaseplane/img/changelog/n1fsgvg.jpg",
       "size": 45044,
-      "date": 134221080990000000
+      "date": 134305155490000000
     },
     {
       "path": "html_ui/ingamepanels/p42chaseplane/img/changelog/pnl9ue1.jpg",
       "size": 39388,
-      "date": 134221080990000000
+      "date": 134305155490000000
     },
     {
       "path": "html_ui/ingamepanels/p42chaseplane/img/changelog/sspctuf.jpg",
       "size": 44520,
-      "date": 134221080990000000
+      "date": 134305155490000000
     },
     {
       "path": "html_ui/ingamepanels/p42chaseplane/img/changelog/w3dl9l0.jpg",
       "size": 24899,
-      "date": 134221080990000000
+      "date": 134305155490000000
     },
     {
       "path": "html_ui/ingamepanels/p42chaseplane/img/chaseplane.svg",
       "size": 3136,
-      "date": 134221080990000000
+      "date": 134305155490000000
     },
     {
       "path": "html_ui/ingamepanels/p42chaseplane/img/chaseplane_studio.svg",
       "size": 3052,
-      "date": 134221080990000000
+      "date": 134305155490000000
     },
     {
       "path": "html_ui/ingamepanels/p42chaseplane/img/chill.svg",
       "size": 6671,
-      "date": 134221080990000000
+      "date": 134305155490000000
     },
     {
       "path": "html_ui/ingamepanels/p42chaseplane/img/cinematic.svg",
       "size": 1564,
-      "date": 134221080990000000
+      "date": 134305155490000000
     },
     {
       "path": "html_ui/ingamepanels/p42chaseplane/img/circle-check.svg",
       "size": 800,
-      "date": 134221080990000000
+      "date": 134305155490000000
     },
     {
       "path": "html_ui/ingamepanels/p42chaseplane/img/close.svg",
       "size": 566,
-      "date": 134221080990000000
+      "date": 134305155490000000
     },
     {
       "path": "html_ui/ingamepanels/p42chaseplane/img/community.svg",
       "size": 692,
-      "date": 134221080990000000
+      "date": 134305155490000000
     },
     {
       "path": "html_ui/ingamepanels/p42chaseplane/img/confused.jpg",
       "size": 36016,
-      "date": 134221080990000000
+      "date": 134305155490000000
     },
     {
       "path": "html_ui/ingamepanels/p42chaseplane/img/control_directional.svg",
       "size": 1335,
-      "date": 134221080990000000
+      "date": 134305155490000000
     },
     {
       "path": "html_ui/ingamepanels/p42chaseplane/img/control_rotational.svg",
       "size": 1103,
-      "date": 134221080990000000
+      "date": 134305155490000000
     },
     {
       "path": "html_ui/ingamepanels/p42chaseplane/img/control_zoom.svg",
       "size": 893,
-      "date": 134221080990000000
+      "date": 134305155490000000
     },
     {
       "path": "html_ui/ingamepanels/p42chaseplane/img/controls.svg",
       "size": 835,
-      "date": 134221080990000000
+      "date": 134305155490000000
     },
     {
       "path": "html_ui/ingamepanels/p42chaseplane/img/controls/cam_binoculars.svg",
       "size": 1483,
-      "date": 134221080990000000
+      "date": 134305155490000000
     },
     {
       "path": "html_ui/ingamepanels/p42chaseplane/img/controls/cam_binoculars_hold.svg",
       "size": 1483,
-      "date": 134221080990000000
+      "date": 134305155490000000
     },
     {
       "path": "html_ui/ingamepanels/p42chaseplane/img/controls/cam_boost_set.svg",
       "size": 1955,
-      "date": 134221080990000000
+      "date": 134305155490000000
     },
     {
       "path": "html_ui/ingamepanels/p42chaseplane/img/controls/cam_control_directional_speed_axis.svg",
       "size": 1335,
-      "date": 134221080990000000
+      "date": 134305155490000000
     },
     {
       "path": "html_ui/ingamepanels/p42chaseplane/img/controls/cam_control_profile.svg",
       "size": 2225,
-      "date": 134221080990000000
+      "date": 134305155490000000
     },
     {
       "path": "html_ui/ingamepanels/p42chaseplane/img/controls/cam_control_profile_fast.svg",
       "size": 1898,
-      "date": 134221080990000000
+      "date": 134305155490000000
     },
     {
       "path": "html_ui/ingamepanels/p42chaseplane/img/controls/cam_control_profile_normal.svg",
       "size": 2213,
-      "date": 134221080990000000
+      "date": 134305155490000000
     },
     {
       "path": "html_ui/ingamepanels/p42chaseplane/img/controls/cam_control_profile_slow.svg",
       "size": 1602,
-      "date": 134221080990000000
+      "date": 134305155490000000
     },
     {
       "path": "html_ui/ingamepanels/p42chaseplane/img/controls/cam_control_rotational_speed_axis.svg",
       "size": 1103,
-      "date": 134221080990000000
+      "date": 134305155490000000
     },
     {
       "path": "html_ui/ingamepanels/p42chaseplane/img/controls/cam_control_zoom_speed_axis.svg",
       "size": 893,
-      "date": 134221080990000000
+      "date": 134305155490000000
     },
     {
       "path": "html_ui/ingamepanels/p42chaseplane/img/controls/cam_drag_release.svg",
       "size": 2876,
-      "date": 134221080990000000
+      "date": 134305155490000000
     },
     {
       "path": "html_ui/ingamepanels/p42chaseplane/img/controls/cam_drag_set.svg",
       "size": 2876,
-      "date": 134221080990000000
+      "date": 134305155490000000
     },
     {
       "path": "html_ui/ingamepanels/p42chaseplane/img/controls/cam_drag_toggle.svg",
       "size": 2876,
-      "date": 134221080990000000
+      "date": 134305155490000000
     },
     {
       "path": "html_ui/ingamepanels/p42chaseplane/img/controls/cam_eye_tracking_reset.svg",
       "size": 2044,
-      "date": 134221080990000000
+      "date": 134305155490000000
     },
     {
       "path": "html_ui/ingamepanels/p42chaseplane/img/controls/cam_flashlight_hold.svg",
       "size": 1901,
-      "date": 134221080990000000
+      "date": 134305155490000000
     },
     {
       "path": "html_ui/ingamepanels/p42chaseplane/img/controls/cam_flashlight_toggle.svg",
       "size": 1901,
-      "date": 134221080990000000
+      "date": 134305155490000000
     },
     {
       "path": "html_ui/ingamepanels/p42chaseplane/img/controls/cam_head_tracking_toggle.svg",
       "size": 1756,
-      "date": 134221080990000000
+      "date": 134305155490000000
     },
     {
       "path": "html_ui/ingamepanels/p42chaseplane/img/controls/cam_move_b.svg",
       "size": 2820,
-      "date": 134221080990000000
+      "date": 134305155490000000
     },
     {
       "path": "html_ui/ingamepanels/p42chaseplane/img/controls/cam_move_d.svg",
       "size": 1787,
-      "date": 134221080990000000
+      "date": 134305155490000000
     },
     {
       "path": "html_ui/ingamepanels/p42chaseplane/img/controls/cam_move_dof.svg",
       "size": 2891,
-      "date": 134221080990000000
+      "date": 134305155490000000
     },
     {
       "path": "html_ui/ingamepanels/p42chaseplane/img/controls/cam_move_f.svg",
       "size": 2833,
-      "date": 134221080990000000
+      "date": 134305155490000000
     },
     {
       "path": "html_ui/ingamepanels/p42chaseplane/img/controls/cam_move_l.svg",
       "size": 2783,
-      "date": 134221080990000000
+      "date": 134305155490000000
     },
     {
       "path": "html_ui/ingamepanels/p42chaseplane/img/controls/cam_move_r.svg",
       "size": 2783,
-      "date": 134221080990000000
+      "date": 134305155490000000
     },
     {
       "path": "html_ui/ingamepanels/p42chaseplane/img/controls/cam_move_u.svg",
       "size": 1787,
-      "date": 134221080990000000
+      "date": 134305155490000000
     },
     {
       "path": "html_ui/ingamepanels/p42chaseplane/img/controls/cam_move_x.svg",
       "size": 2712,
-      "date": 134221080990000000
+      "date": 134305155490000000
     },
     {
       "path": "html_ui/ingamepanels/p42chaseplane/img/controls/cam_move_y.svg",
       "size": 1765,
-      "date": 134221080990000000
+      "date": 134305155490000000
     },
     {
       "path": "html_ui/ingamepanels/p42chaseplane/img/controls/cam_move_z.svg",
       "size": 2874,
-      "date": 134221080990000000
+      "date": 134305155490000000
     },
     {
       "path": "html_ui/ingamepanels/p42chaseplane/img/controls/cam_move_zoom.svg",
       "size": 1097,
-      "date": 134221080990000000
+      "date": 134305155490000000
     },
     {
       "path": "html_ui/ingamepanels/p42chaseplane/img/controls/cam_near_parking.svg",
       "size": 1068,
-      "date": 134221080990000000
+      "date": 134305155490000000
     },
     {
       "path": "html_ui/ingamepanels/p42chaseplane/img/controls/cam_near_runway.svg",
       "size": 3668,
-      "date": 134221080990000000
+      "date": 134305155490000000
     },
     {
       "path": "html_ui/ingamepanels/p42chaseplane/img/controls/cam_near_tower.svg",
       "size": 1138,
-      "date": 134221080990000000
+      "date": 134305155490000000
     },
     {
       "path": "html_ui/ingamepanels/p42chaseplane/img/controls/cam_next_cinematic.svg",
       "size": 2006,
-      "date": 134221080990000000
+      "date": 134305155490000000
     },
     {
       "path": "html_ui/ingamepanels/p42chaseplane/img/controls/cam_next_group.svg",
       "size": 1242,
-      "date": 134221080990000000
+      "date": 134305155490000000
     },
     {
       "path": "html_ui/ingamepanels/p42chaseplane/img/controls/cam_next_view.svg",
       "size": 1585,
-      "date": 134221080990000000
+      "date": 134305155490000000
     },
     {
       "path": "html_ui/ingamepanels/p42chaseplane/img/controls/cam_prev_group.svg",
       "size": 1062,
-      "date": 134221080990000000
+      "date": 134305155490000000
     },
     {
       "path": "html_ui/ingamepanels/p42chaseplane/img/controls/cam_prev_view.svg",
       "size": 1532,
-      "date": 134221080990000000
+      "date": 134305155490000000
     },
     {
       "path": "html_ui/ingamepanels/p42chaseplane/img/controls/cam_quick_view_behind.svg",
       "size": 2257,
-      "date": 134221080990000000
+      "date": 134305155490000000
     },
     {
       "path": "html_ui/ingamepanels/p42chaseplane/img/controls/cam_quick_view_down.svg",
       "size": 1706,
-      "date": 134221080990000000
+      "date": 134305155490000000
     },
     {
       "path": "html_ui/ingamepanels/p42chaseplane/img/controls/cam_quick_view_left.svg",
       "size": 1642,
-      "date": 134221080990000000
+      "date": 134305155490000000
     },
     {
       "path": "html_ui/ingamepanels/p42chaseplane/img/controls/cam_quick_view_right.svg",
       "size": 1647,
-      "date": 134221080990000000
+      "date": 134305155490000000
     },
     {
       "path": "html_ui/ingamepanels/p42chaseplane/img/controls/cam_quick_view_up.svg",
       "size": 1696,
-      "date": 134221080990000000
+      "date": 134305155490000000
     },
     {
       "path": "html_ui/ingamepanels/p42chaseplane/img/controls/cam_reset.svg",
       "size": 1241,
-      "date": 134221080990000000
+      "date": 134305155490000000
     },
     {
       "path": "html_ui/ingamepanels/p42chaseplane/img/controls/cam_reset_orient.svg",
       "size": 1241,
-      "date": 134221080990000000
+      "date": 134305155490000000
     },
     {
       "path": "html_ui/ingamepanels/p42chaseplane/img/controls/cam_reset_zoom.svg",
       "size": 1241,
-      "date": 134221080990000000
+      "date": 134305155490000000
     },
     {
       "path": "html_ui/ingamepanels/p42chaseplane/img/controls/cam_roll_l.svg",
       "size": 3173,
-      "date": 134221080990000000
+      "date": 134305155490000000
     },
     {
       "path": "html_ui/ingamepanels/p42chaseplane/img/controls/cam_roll_r.svg",
       "size": 3246,
-      "date": 134221080990000000
+      "date": 134305155490000000
     },
     {
       "path": "html_ui/ingamepanels/p42chaseplane/img/controls/cam_rot_b.svg",
       "size": 3173,
-      "date": 134221080990000000
+      "date": 134305155490000000
     },
     {
       "path": "html_ui/ingamepanels/p42chaseplane/img/controls/cam_rot_d.svg",
       "size": 3412,
-      "date": 134221080990000000
+      "date": 134305155490000000
     },
     {
       "path": "html_ui/ingamepanels/p42chaseplane/img/controls/cam_rot_h.svg",
       "size": 2297,
-      "date": 134221080990000000
+      "date": 134305155490000000
     },
     {
       "path": "html_ui/ingamepanels/p42chaseplane/img/controls/cam_rot_l.svg",
       "size": 2297,
-      "date": 134221080990000000
+      "date": 134305155490000000
     },
     {
       "path": "html_ui/ingamepanels/p42chaseplane/img/controls/cam_rot_p.svg",
       "size": 3235,
-      "date": 134221080990000000
+      "date": 134305155490000000
     },
     {
       "path": "html_ui/ingamepanels/p42chaseplane/img/controls/cam_rot_r.svg",
       "size": 2222,
-      "date": 134221080990000000
+      "date": 134305155490000000
     },
     {
       "path": "html_ui/ingamepanels/p42chaseplane/img/controls/cam_rot_u.svg",
       "size": 3235,
-      "date": 134221080990000000
+      "date": 134305155490000000
     },
     {
       "path": "html_ui/ingamepanels/p42chaseplane/img/controls/cam_scroll_zoom_modifier.svg",
       "size": 1097,
-      "date": 134221080990000000
+      "date": 134305155490000000
     },
     {
       "path": "html_ui/ingamepanels/p42chaseplane/img/controls/cam_set_cinematic.svg",
       "size": 1564,
-      "date": 134221080990000000
+      "date": 134305155490000000
     },
     {
       "path": "html_ui/ingamepanels/p42chaseplane/img/controls/cam_set_drone.svg",
       "size": 4150,
-      "date": 134221080990000000
+      "date": 134305155490000000
     },
     {
       "path": "html_ui/ingamepanels/p42chaseplane/img/controls/cam_set_flyby.svg",
       "size": 1004,
-      "date": 134221080990000000
+      "date": 134305155490000000
     },
     {
       "path": "html_ui/ingamepanels/p42chaseplane/img/controls/cam_set_onboard.svg",
       "size": 2520,
-      "date": 134221080990000000
+      "date": 134305155490000000
     },
     {
       "path": "html_ui/ingamepanels/p42chaseplane/img/controls/cam_set_outside.svg",
       "size": 1335,
-      "date": 134221080990000000
+      "date": 134305155490000000
     },
     {
       "path": "html_ui/ingamepanels/p42chaseplane/img/controls/cam_set_world.svg",
       "size": 1306,
-      "date": 134221080990000000
+      "date": 134305155490000000
     },
     {
       "path": "html_ui/ingamepanels/p42chaseplane/img/controls/cam_smart_view.svg",
       "size": 4178,
-      "date": 134221080990000000
+      "date": 134305155490000000
     },
     {
       "path": "html_ui/ingamepanels/p42chaseplane/img/controls/cam_smart_view_hold.svg",
       "size": 4178,
-      "date": 134221080990000000
+      "date": 134305155490000000
     },
     {
       "path": "html_ui/ingamepanels/p42chaseplane/img/controls/cam_toggle_dof.svg",
       "size": 2891,
-      "date": 134221080990000000
+      "date": 134305155490000000
     },
     {
       "path": "html_ui/ingamepanels/p42chaseplane/img/controls/cam_toggle_in_out.svg",
       "size": 2426,
-      "date": 134221080990000000
+      "date": 134305155490000000
     },
     {
       "path": "html_ui/ingamepanels/p42chaseplane/img/controls/cam_zoom_in.svg",
       "size": 1626,
-      "date": 134221080990000000
+      "date": 134305155490000000
     },
     {
       "path": "html_ui/ingamepanels/p42chaseplane/img/controls/cam_zoom_out.svg",
       "size": 1423,
-      "date": 134221080990000000
+      "date": 134305155490000000
     },
     {
       "path": "html_ui/ingamepanels/p42chaseplane/img/controls/cp_disable.svg",
       "size": 950,
-      "date": 134221080990000000
+      "date": 134305155490000000
     },
     {
       "path": "html_ui/ingamepanels/p42chaseplane/img/controls/cp_enable.svg",
       "size": 739,
-      "date": 134221080990000000
+      "date": 134305155490000000
     },
     {
       "path": "html_ui/ingamepanels/p42chaseplane/img/controls/cp_enable_toggle.svg",
       "size": 739,
-      "date": 134221080990000000
+      "date": 134305155490000000
     },
     {
       "path": "html_ui/ingamepanels/p42chaseplane/img/controls/floating.svg",
       "size": 1510,
-      "date": 134221080990000000
+      "date": 134305155490000000
     },
     {
       "path": "html_ui/ingamepanels/p42chaseplane/img/controls/ui_toggle.svg",
       "size": 1558,
-      "date": 134221080990000000
+      "date": 134305155490000000
     },
     {
       "path": "html_ui/ingamepanels/p42chaseplane/img/copy.svg",
       "size": 1007,
-      "date": 134221080990000000
+      "date": 134305155490000000
     },
     {
       "path": "html_ui/ingamepanels/p42chaseplane/img/crash.svg",
       "size": 4111,
-      "date": 134221080990000000
+      "date": 134305155490000000
     },
     {
       "path": "html_ui/ingamepanels/p42chaseplane/img/demo.svg",
       "size": 1036,
-      "date": 134221080990000000
+      "date": 134305155490000000
     },
     {
       "path": "html_ui/ingamepanels/p42chaseplane/img/diamond-exclamation.svg",
       "size": 979,
-      "date": 134221080990000000
+      "date": 134305155490000000
     },
     {
       "path": "html_ui/ingamepanels/p42chaseplane/img/directional.svg",
       "size": 872,
-      "date": 134221080990000000
+      "date": 134305155490000000
     },
     {
       "path": "html_ui/ingamepanels/p42chaseplane/img/down.svg",
       "size": 439,
-      "date": 134221080990000000
+      "date": 134305155490000000
     },
     {
       "path": "html_ui/ingamepanels/p42chaseplane/img/drag.svg",
       "size": 1346,
-      "date": 134221080990000000
+      "date": 134305155490000000
     },
     {
       "path": "html_ui/ingamepanels/p42chaseplane/img/duplicate.svg",
       "size": 551,
-      "date": 134221080990000000
+      "date": 134305155490000000
     },
     {
       "path": "html_ui/ingamepanels/p42chaseplane/img/edit.svg",
       "size": 572,
-      "date": 134221080990000000
+      "date": 134305155490000000
     },
     {
       "path": "html_ui/ingamepanels/p42chaseplane/img/external.svg",
       "size": 689,
-      "date": 134221080990000000
+      "date": 134305155490000000
     },
     {
       "path": "html_ui/ingamepanels/p42chaseplane/img/flashlight.svg",
       "size": 1901,
-      "date": 134221080990000000
+      "date": 134305155490000000
     },
     {
       "path": "html_ui/ingamepanels/p42chaseplane/img/flip.svg",
       "size": 2116,
-      "date": 134221080990000000
-    },
-    {
-      "path": "html_ui/ingamepanels/p42chaseplane/img/ground_vehicle.svg",
-      "size": 1685,
-      "date": 134221080990000000
+      "date": 134305155490000000
     },
     {
       "path": "html_ui/ingamepanels/p42chaseplane/img/group.svg",
       "size": 888,
-      "date": 134221080990000000
+      "date": 134305155490000000
     },
     {
       "path": "html_ui/ingamepanels/p42chaseplane/img/head_track.svg",
       "size": 1756,
-      "date": 134221080990000000
+      "date": 134305155490000000
     },
     {
       "path": "html_ui/ingamepanels/p42chaseplane/img/head_track_disabled.svg",
       "size": 1968,
-      "date": 134221080990000000
+      "date": 134305155490000000
     },
     {
       "path": "html_ui/ingamepanels/p42chaseplane/img/help.svg",
       "size": 1318,
-      "date": 134221080990000000
-    },
-    {
-      "path": "html_ui/ingamepanels/p42chaseplane/img/home.svg",
-      "size": 961,
-      "date": 134221080990000000
+      "date": 134305155490000000
     },
     {
       "path": "html_ui/ingamepanels/p42chaseplane/img/import.svg",
       "size": 653,
-      "date": 134221080990000000
+      "date": 134305155490000000
     },
     {
       "path": "html_ui/ingamepanels/p42chaseplane/img/infinity.svg",
       "size": 1494,
-      "date": 134221080990000000
+      "date": 134305155490000000
     },
     {
       "path": "html_ui/ingamepanels/p42chaseplane/img/info.svg",
       "size": 953,
-      "date": 134221080990000000
+      "date": 134305155490000000
     },
     {
       "path": "html_ui/ingamepanels/p42chaseplane/img/joystick.svg",
       "size": 1168,
-      "date": 134221080990000000
+      "date": 134305155490000000
     },
     {
       "path": "html_ui/ingamepanels/p42chaseplane/img/joystick_base.png",
       "size": 233763,
-      "date": 134221080990000000
+      "date": 134305155490000000
     },
     {
       "path": "html_ui/ingamepanels/p42chaseplane/img/joystick_base_x.png",
       "size": 118833,
-      "date": 134221080990000000
+      "date": 134305155490000000
     },
     {
       "path": "html_ui/ingamepanels/p42chaseplane/img/joystick_base_y.png",
       "size": 126678,
-      "date": 134221080990000000
+      "date": 134305155490000000
     },
     {
       "path": "html_ui/ingamepanels/p42chaseplane/img/joystick_knob.png",
       "size": 152901,
-      "date": 134221080990000000
+      "date": 134305155490000000
     },
     {
       "path": "html_ui/ingamepanels/p42chaseplane/img/library.svg",
       "size": 315,
-      "date": 134221080990000000
+      "date": 134305155490000000
     },
     {
       "path": "html_ui/ingamepanels/p42chaseplane/img/look_at.svg",
       "size": 952,
-      "date": 134221080990000000
+      "date": 134305155490000000
     },
     {
       "path": "html_ui/ingamepanels/p42chaseplane/img/map_grid.png",
       "size": 855,
-      "date": 134221080990000000
+      "date": 134305155490000000
     },
     {
       "path": "html_ui/ingamepanels/p42chaseplane/img/martini.svg",
       "size": 869,
-      "date": 134221080990000000
+      "date": 134305155490000000
     },
     {
       "path": "html_ui/ingamepanels/p42chaseplane/img/minimize.svg",
       "size": 412,
-      "date": 134221080990000000
+      "date": 134305155490000000
     },
     {
       "path": "html_ui/ingamepanels/p42chaseplane/img/misc.svg",
       "size": 771,
-      "date": 134221080990000000
+      "date": 134305155490000000
     },
     {
       "path": "html_ui/ingamepanels/p42chaseplane/img/mode_bg_external.svg",
       "size": 5364,
-      "date": 134221080990000000
+      "date": 134305155490000000
     },
     {
       "path": "html_ui/ingamepanels/p42chaseplane/img/mode_bg_internal.svg",
       "size": 3942,
-      "date": 134221080990000000
+      "date": 134305155490000000
     },
     {
       "path": "html_ui/ingamepanels/p42chaseplane/img/mode_bg_world.svg",
       "size": 3691,
-      "date": 134221080990000000
+      "date": 134305155490000000
     },
     {
       "path": "html_ui/ingamepanels/p42chaseplane/img/mode_external.svg",
       "size": 4867,
-      "date": 134221080990000000
+      "date": 134305155490000000
     },
     {
       "path": "html_ui/ingamepanels/p42chaseplane/img/mode_internal.svg",
       "size": 4041,
-      "date": 134221080990000000
+      "date": 134305155490000000
     },
     {
       "path": "html_ui/ingamepanels/p42chaseplane/img/mode_world.svg",
       "size": 4504,
-      "date": 134221080990000000
+      "date": 134305155490000000
     },
     {
       "path": "html_ui/ingamepanels/p42chaseplane/img/motion.svg",
       "size": 1043,
-      "date": 134221080990000000
+      "date": 134305155490000000
     },
     {
       "path": "html_ui/ingamepanels/p42chaseplane/img/motion_aircraft_effects.svg",
       "size": 681,
-      "date": 134221080990000000
+      "date": 134305155490000000
     },
     {
       "path": "html_ui/ingamepanels/p42chaseplane/img/motion_effects.svg",
       "size": 1028,
-      "date": 134221080990000000
+      "date": 134305155490000000
     },
     {
       "path": "html_ui/ingamepanels/p42chaseplane/img/motion_environment_effects.svg",
       "size": 782,
-      "date": 134221080990000000
+      "date": 134305155490000000
     },
     {
       "path": "html_ui/ingamepanels/p42chaseplane/img/motion_human_effects.svg",
       "size": 634,
-      "date": 134221080990000000
+      "date": 134305155490000000
     },
     {
       "path": "html_ui/ingamepanels/p42chaseplane/img/mouse.svg",
       "size": 590,
-      "date": 134221080990000000
+      "date": 134305155490000000
     },
     {
       "path": "html_ui/ingamepanels/p42chaseplane/img/nav_back.svg",
       "size": 379,
-      "date": 134221080990000000
+      "date": 134305155490000000
     },
     {
       "path": "html_ui/ingamepanels/p42chaseplane/img/nav_burger.svg",
       "size": 506,
-      "date": 134221080990000000
+      "date": 134305155490000000
     },
     {
       "path": "html_ui/ingamepanels/p42chaseplane/img/nav_close.svg",
       "size": 518,
-      "date": 134221080990000000
+      "date": 134305155490000000
     },
     {
       "path": "html_ui/ingamepanels/p42chaseplane/img/nav_forward.svg",
       "size": 439,
-      "date": 134221080990000000
+      "date": 134305155490000000
     },
     {
       "path": "html_ui/ingamepanels/p42chaseplane/img/next.svg",
       "size": 665,
-      "date": 134221080990000000
+      "date": 134305155490000000
     },
     {
       "path": "html_ui/ingamepanels/p42chaseplane/img/null.svg",
       "size": 820,
-      "date": 134221080990000000
+      "date": 134305155490000000
     },
     {
       "path": "html_ui/ingamepanels/p42chaseplane/img/off.svg",
       "size": 2203,
-      "date": 134221080990000000
+      "date": 134305155490000000
     },
     {
       "path": "html_ui/ingamepanels/p42chaseplane/img/paste.svg",
       "size": 900,
-      "date": 134221080990000000
+      "date": 134305155490000000
     },
     {
       "path": "html_ui/ingamepanels/p42chaseplane/img/physics_damping.svg",
       "size": 2340,
-      "date": 134221080990000000
+      "date": 134305155490000000
     },
     {
       "path": "html_ui/ingamepanels/p42chaseplane/img/physics_mass.svg",
       "size": 1208,
-      "date": 134221080990000000
+      "date": 134305155490000000
     },
     {
       "path": "html_ui/ingamepanels/p42chaseplane/img/physics_multiplier.svg",
       "size": 1300,
-      "date": 134221080990000000
+      "date": 134305155490000000
     },
     {
       "path": "html_ui/ingamepanels/p42chaseplane/img/physics_stiffness.svg",
       "size": 1440,
-      "date": 134221080990000000
+      "date": 134305155490000000
     },
     {
       "path": "html_ui/ingamepanels/p42chaseplane/img/physics_types/chase.svg",
       "size": 1566,
-      "date": 134221080990000000
+      "date": 134305155490000000
     },
     {
       "path": "html_ui/ingamepanels/p42chaseplane/img/physics_types/floating.svg",
       "size": 1510,
-      "date": 134221080990000000
+      "date": 134305155490000000
     },
     {
       "path": "html_ui/ingamepanels/p42chaseplane/img/physics_types/human.svg",
       "size": 572,
-      "date": 134221080990000000
+      "date": 134305155490000000
     },
     {
       "path": "html_ui/ingamepanels/p42chaseplane/img/physics_types/mounted.svg",
       "size": 599,
-      "date": 134221080990000000
+      "date": 134305155490000000
     },
     {
       "path": "html_ui/ingamepanels/p42chaseplane/img/physics_types/orbit.svg",
       "size": 2819,
-      "date": 134221080990000000
+      "date": 134305155490000000
     },
     {
       "path": "html_ui/ingamepanels/p42chaseplane/img/plane.svg",
       "size": 681,
-      "date": 134221080990000000
+      "date": 134305155490000000
     },
     {
       "path": "html_ui/ingamepanels/p42chaseplane/img/play.svg",
       "size": 1092,
-      "date": 134221080990000000
+      "date": 134305155490000000
     },
     {
       "path": "html_ui/ingamepanels/p42chaseplane/img/preferences.svg",
       "size": 578,
-      "date": 134221080990000000
+      "date": 134305155490000000
     },
     {
       "path": "html_ui/ingamepanels/p42chaseplane/img/private.svg",
       "size": 703,
-      "date": 134221080990000000
+      "date": 134305155490000000
     },
     {
       "path": "html_ui/ingamepanels/p42chaseplane/img/profile_themes/onboard_cabin.svg",
       "size": 777,
-      "date": 134221080990000000
+      "date": 134305155490000000
     },
     {
       "path": "html_ui/ingamepanels/p42chaseplane/img/profile_themes/onboard_misc.svg",
       "size": 771,
-      "date": 134221080990000000
+      "date": 134305155490000000
     },
     {
       "path": "html_ui/ingamepanels/p42chaseplane/img/profile_themes/onboard_mounted.svg",
       "size": 2211,
-      "date": 134221080990000000
+      "date": 134305155490000000
     },
     {
       "path": "html_ui/ingamepanels/p42chaseplane/img/profile_themes/onboard_pic.svg",
       "size": 2558,
-      "date": 134221080990000000
+      "date": 134305155490000000
     },
     {
       "path": "html_ui/ingamepanels/p42chaseplane/img/profile_themes/onboard_systems.svg",
       "size": 2335,
-      "date": 134221080990000000
+      "date": 134305155490000000
     },
     {
       "path": "html_ui/ingamepanels/p42chaseplane/img/profile_themes/outside_airframe.svg",
       "size": 2211,
-      "date": 134221080990000000
+      "date": 134305155490000000
     },
     {
       "path": "html_ui/ingamepanels/p42chaseplane/img/profile_themes/outside_cabin.svg",
       "size": 777,
-      "date": 134221080990000000
+      "date": 134305155490000000
     },
     {
       "path": "html_ui/ingamepanels/p42chaseplane/img/profile_themes/outside_chase.svg",
       "size": 1566,
-      "date": 134221080990000000
+      "date": 134305155490000000
     },
     {
       "path": "html_ui/ingamepanels/p42chaseplane/img/profile_themes/outside_misc.svg",
       "size": 771,
-      "date": 134221080990000000
+      "date": 134305155490000000
     },
     {
       "path": "html_ui/ingamepanels/p42chaseplane/img/profile_themes/outside_orbit.svg",
       "size": 2911,
-      "date": 134221080990000000
+      "date": 134305155490000000
     },
     {
       "path": "html_ui/ingamepanels/p42chaseplane/img/profile_themes/world_default.svg",
       "size": 430,
-      "date": 134221080990000000
+      "date": 134305155490000000
     },
     {
       "path": "html_ui/ingamepanels/p42chaseplane/img/profile_themes/world_misc.svg",
       "size": 849,
-      "date": 134221080990000000
+      "date": 134305155490000000
     },
     {
       "path": "html_ui/ingamepanels/p42chaseplane/img/profile_themes/world_parking.svg",
       "size": 1068,
-      "date": 134221080990000000
+      "date": 134305155490000000
     },
     {
       "path": "html_ui/ingamepanels/p42chaseplane/img/profile_themes/world_runway.svg",
       "size": 3668,
-      "date": 134221080990000000
+      "date": 134305155490000000
     },
     {
       "path": "html_ui/ingamepanels/p42chaseplane/img/profile_themes/world_tower.svg",
       "size": 1138,
-      "date": 134221080990000000
+      "date": 134305155490000000
     },
     {
       "path": "html_ui/ingamepanels/p42chaseplane/img/public.svg",
       "size": 1533,
-      "date": 134221080990000000
+      "date": 134305155490000000
     },
     {
       "path": "html_ui/ingamepanels/p42chaseplane/img/reorder.svg",
       "size": 528,
-      "date": 134221080990000000
+      "date": 134305155490000000
     },
     {
       "path": "html_ui/ingamepanels/p42chaseplane/img/reset.svg",
       "size": 647,
-      "date": 134221080990000000
+      "date": 134305155490000000
     },
     {
       "path": "html_ui/ingamepanels/p42chaseplane/img/save.svg",
       "size": 723,
-      "date": 134221080990000000
+      "date": 134305155490000000
     },
     {
       "path": "html_ui/ingamepanels/p42chaseplane/img/search.svg",
       "size": 705,
-      "date": 134221080990000000
+      "date": 134305155490000000
     },
     {
       "path": "html_ui/ingamepanels/p42chaseplane/img/select.svg",
       "size": 467,
-      "date": 134221080990000000
+      "date": 134305155490000000
     },
     {
       "path": "html_ui/ingamepanels/p42chaseplane/img/skip.svg",
       "size": 1411,
-      "date": 134221080990000000
+      "date": 134305155490000000
     },
     {
       "path": "html_ui/ingamepanels/p42chaseplane/img/speed_fast.svg",
       "size": 1898,
-      "date": 134221080990000000
+      "date": 134305155490000000
     },
     {
       "path": "html_ui/ingamepanels/p42chaseplane/img/speed_normal.svg",
       "size": 2213,
-      "date": 134221080990000000
+      "date": 134305155490000000
     },
     {
       "path": "html_ui/ingamepanels/p42chaseplane/img/speed_slow.svg",
       "size": 1602,
-      "date": 134221080990000000
+      "date": 134305155490000000
     },
     {
       "path": "html_ui/ingamepanels/p42chaseplane/img/speed_studio.svg",
       "size": 1561,
-      "date": 134221080990000000
+      "date": 134305155490000000
     },
     {
       "path": "html_ui/ingamepanels/p42chaseplane/img/stop.svg",
       "size": 1617,
-      "date": 134221080990000000
+      "date": 134305155490000000
     },
     {
       "path": "html_ui/ingamepanels/p42chaseplane/img/studio.svg",
       "size": 748,
-      "date": 134221080990000000
+      "date": 134305155490000000
     },
     {
       "path": "html_ui/ingamepanels/p42chaseplane/img/sync.svg",
       "size": 1665,
-      "date": 134221080990000000
+      "date": 134305155490000000
     },
     {
       "path": "html_ui/ingamepanels/p42chaseplane/img/text_input.svg",
       "size": 949,
-      "date": 134221080990000000
+      "date": 134305155490000000
     },
     {
       "path": "html_ui/ingamepanels/p42chaseplane/img/theme.svg",
       "size": 800,
-      "date": 134221080990000000
+      "date": 134305155490000000
     },
     {
       "path": "html_ui/ingamepanels/p42chaseplane/img/toggle_off.svg",
       "size": 589,
-      "date": 134221080990000000
+      "date": 134305155490000000
     },
     {
       "path": "html_ui/ingamepanels/p42chaseplane/img/toggle_on.svg",
       "size": 467,
-      "date": 134221080990000000
+      "date": 134305155490000000
     },
     {
       "path": "html_ui/ingamepanels/p42chaseplane/img/transfer.svg",
       "size": 4517,
-      "date": 134221080990000000
+      "date": 134305155490000000
     },
     {
       "path": "html_ui/ingamepanels/p42chaseplane/img/transition.svg",
       "size": 929,
-      "date": 134221080990000000
+      "date": 134305155490000000
     },
     {
       "path": "html_ui/ingamepanels/p42chaseplane/img/trash.svg",
       "size": 552,
-      "date": 134221080990000000
+      "date": 134305155490000000
     },
     {
       "path": "html_ui/ingamepanels/p42chaseplane/img/tuning.svg",
       "size": 912,
-      "date": 134221080990000000
+      "date": 134305155490000000
     },
     {
       "path": "html_ui/ingamepanels/p42chaseplane/img/tutorial.svg",
       "size": 2181,
-      "date": 134221080990000000
+      "date": 134305155490000000
     },
     {
       "path": "html_ui/ingamepanels/p42chaseplane/img/tutorials/cp_logo.svg",
       "size": 10758,
-      "date": 134221080990000000
+      "date": 134305155490000000
     },
     {
       "path": "html_ui/ingamepanels/p42chaseplane/img/tutorials/cp_logo_studio.svg",
       "size": 12856,
-      "date": 134221080990000000
+      "date": 134305155490000000
     },
     {
       "path": "html_ui/ingamepanels/p42chaseplane/img/tutorials/important_note.svg",
       "size": 1587,
-      "date": 134221080990000000
+      "date": 134305155490000000
     },
     {
       "path": "html_ui/ingamepanels/p42chaseplane/img/tutorials/mouse_look.svg",
       "size": 14353,
-      "date": 134221080990000000
+      "date": 134305155490000000
     },
     {
       "path": "html_ui/ingamepanels/p42chaseplane/img/tutorials/videos/assign_binoculars.webm",
       "size": 335723,
-      "date": 134221080990000000
+      "date": 134305155490000000
     },
     {
       "path": "html_ui/ingamepanels/p42chaseplane/img/tutorials/videos/assign_cinematics.webm",
       "size": 1390719,
-      "date": 134221080990000000
+      "date": 134305155490000000
     },
     {
       "path": "html_ui/ingamepanels/p42chaseplane/img/tutorials/videos/assign_head_eye_tracking.webm",
       "size": 814925,
-      "date": 134221080990000000
+      "date": 134305155490000000
     },
     {
       "path": "html_ui/ingamepanels/p42chaseplane/img/tutorials/videos/assign_in_out.webm",
       "size": 260682,
-      "date": 134221080990000000
+      "date": 134305155490000000
     },
     {
       "path": "html_ui/ingamepanels/p42chaseplane/img/tutorials/videos/assign_move.webm",
       "size": 1174288,
-      "date": 134221080990000000
+      "date": 134305155490000000
     },
     {
       "path": "html_ui/ingamepanels/p42chaseplane/img/tutorials/videos/assign_move_h.webm",
       "size": 782468,
-      "date": 134221080990000000
+      "date": 134305155490000000
     },
     {
       "path": "html_ui/ingamepanels/p42chaseplane/img/tutorials/videos/assign_move_p.webm",
       "size": 723218,
-      "date": 134221080990000000
+      "date": 134305155490000000
     },
     {
       "path": "html_ui/ingamepanels/p42chaseplane/img/tutorials/videos/assign_move_x.webm",
       "size": 666597,
-      "date": 134221080990000000
+      "date": 134305155490000000
     },
     {
       "path": "html_ui/ingamepanels/p42chaseplane/img/tutorials/videos/assign_move_y.webm",
       "size": 587993,
-      "date": 134221080990000000
+      "date": 134305155490000000
     },
     {
       "path": "html_ui/ingamepanels/p42chaseplane/img/tutorials/videos/assign_move_z.webm",
       "size": 636576,
-      "date": 134221080990000000
+      "date": 134305155490000000
     },
     {
       "path": "html_ui/ingamepanels/p42chaseplane/img/tutorials/videos/assign_move_zoom.webm",
       "size": 680280,
-      "date": 134221080990000000
+      "date": 134305155490000000
     },
     {
       "path": "html_ui/ingamepanels/p42chaseplane/img/tutorials/videos/assign_prev_next.webm",
       "size": 412248,
-      "date": 134221080990000000
+      "date": 134305155490000000
     },
     {
       "path": "html_ui/ingamepanels/p42chaseplane/img/tutorials/videos/assign_qv.webm",
       "size": 660190,
-      "date": 134221080990000000
+      "date": 134305155490000000
     },
     {
       "path": "html_ui/ingamepanels/p42chaseplane/img/tutorials/videos/assign_reset.webm",
       "size": 298098,
-      "date": 134221080990000000
+      "date": 134305155490000000
     },
     {
       "path": "html_ui/ingamepanels/p42chaseplane/img/tutorials/videos/mouse_look.webm",
       "size": 1596578,
-      "date": 134221080990000000
+      "date": 134305155490000000
     },
     {
       "path": "html_ui/ingamepanels/p42chaseplane/img/up.svg",
       "size": 439,
-      "date": 134221080990000000
+      "date": 134305155490000000
     },
     {
       "path": "html_ui/ingamepanels/p42chaseplane/img/up_down.svg",
       "size": 2136,
-      "date": 134221080990000000
+      "date": 134305155490000000
     },
     {
       "path": "html_ui/ingamepanels/p42chaseplane/img/user_minus.svg",
       "size": 839,
-      "date": 134221080990000000
+      "date": 134305155490000000
     },
     {
       "path": "html_ui/ingamepanels/p42chaseplane/img/user_plus.svg",
       "size": 985,
-      "date": 134221080990000000
+      "date": 134305155490000000
     },
     {
       "path": "html_ui/ingamepanels/p42chaseplane/img/view.svg",
       "size": 438,
-      "date": 134221080990000000
+      "date": 134305155490000000
     },
     {
       "path": "html_ui/ingamepanels/p42chaseplane/index.html",
       "size": 246,
-      "date": 134221080990000000
+      "date": 134305155490000000
     },
     {
       "path": "html_ui/ingamepanels/p42chaseplane/js/app.js",
-      "size": 1044183,
-      "date": 134221080990000000
+      "size": 1050081,
+      "date": 134305155490000000
     },
     {
       "path": "html_ui/ingamepanels/p42chaseplane/js/chunk-vendors.js",
-      "size": 925722,
-      "date": 134221080990000000
+      "size": 977197,
+      "date": 134305155490000000
     },
     {
       "path": "html_ui/ingamepanels/p42chaseplane/libs/leaflet/leaflet.css",
       "size": 11120,
-      "date": 134221080990000000
+      "date": 134305155490000000
     },
     {
       "path": "html_ui/ingamepanels/p42chaseplane/libs/leaflet/leaflet.js",
       "size": 147814,
-      "date": 134221080990000000
+      "date": 134305155490000000
     },
     {
       "path": "html_ui/ingamepanels/p42chaseplane/libs/leaflet/tilelayer-canvas.min.js",
       "size": 944,
-      "date": 134221080990000000
+      "date": 134305155490000000
     },
     {
       "path": "html_ui/ingamepanels/p42chaseplane/libs/suncalc/suncalc.js",
       "size": 3280,
-      "date": 134221080990000000
+      "date": 134305155490000000
     },
     {
       "path": "html_ui/ingamepanels/p42chaseplane/libs/turf/turf.min.js",
       "size": 604297,
-      "date": 134221080990000000
+      "date": 134305155490000000
     },
     {
       "path": "html_ui/ingamepanels/p42chaseplane/p42chaseplane.css",
       "size": 597,
-      "date": 134221080990000000
+      "date": 134305155490000000
     },
     {
       "path": "html_ui/ingamepanels/p42chaseplane/p42chaseplane.html",
-      "size": 10413,
-      "date": 134221080990000000
+      "size": 10415,
+      "date": 134305155490000000
     },
     {
       "path": "html_ui/ingamepanels/p42chaseplane/p42chaseplane.js",
-      "size": 25300,
-      "date": 134221080990000000
+      "size": 27269,
+      "date": 134305155490000000
     },
     {
       "path": "html_ui/ingamepanels/p42chaseplane/p42chaseplane_overlay.html",
       "size": 9612,
-      "date": 134221080990000000
+      "date": 134305155490000000
     },
     {
       "path": "html_ui/ingamepanels/p42chaseplane/p42chaseplane_overlay.js",
-      "size": 21914,
-      "date": 134221080990000000
+      "size": 21508,
+      "date": 134305155490000000
     },
     {
       "path": "html_ui/ingamepanels/p42chaseplane/p42chaseplane_worker.js",
-      "size": 51720,
-      "date": 134221080990000000
-    },
-    {
-      "path": "html_ui/ingamepanels/p42chaseplane/update_seed.txt",
-      "size": 12,
-      "date": 134221080990000000
+      "size": 51821,
+      "date": 134305155490000000
     },
     {
       "path": "html_ui/pages/toolbar/toolbar_interop.js",
       "size": 4773,
-      "date": 134212794060000000
+      "date": 134297194630000000
     },
     {
       "path": "ingamepanels/p42-util-chaseplane-overlay.spb",
       "size": 667,
-      "date": 134212770080000000
+      "date": 134305154270000000
     },
     {
       "path": "ingamepanels/p42-util-chaseplane.spb",
       "size": 655,
-      "date": 134212770080000000
+      "date": 134305154270000000
     },
     {
       "path": "inputprofiles/categories/airplane/yawman_arrow_-_hat_switch_trim_2020_planes.xml",
@@ -1512,8 +1492,8 @@
     },
     {
       "path": "modules/chaseplanemodule.wasm",
-      "size": 1792784,
-      "date": 134221080990000000
+      "size": 1823381,
+      "date": 134305155030000000
     },
     {
       "path": "modules/towers/13nc.txt",
@@ -19304,6 +19284,11 @@
       "path": "simobjects/groundvehicles/p42_flashlight/texture/p42_flashlight_emish.png.ktx2.json",
       "size": 102,
       "date": 134212764930000000
+    },
+    {
+      "path": "html_ui/ingamepanels/p42chaseplane/branch.txt",
+      "size": 13,
+      "date": 134306696302535490
     },
     {
       "path": "html_ui/ingamepanels/p42chaseplane/chaseplane.zh-cn.js",

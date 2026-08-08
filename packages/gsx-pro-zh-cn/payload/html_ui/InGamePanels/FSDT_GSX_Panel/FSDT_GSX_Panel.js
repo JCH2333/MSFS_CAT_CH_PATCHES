@@ -1,4 +1,4 @@
-/* GSX Pro 4.0.14 Simplified Chinese patch v1.1.0. */
+/* GSX Pro 4.0.15 Simplified Chinese patch v1.2.0. */
 var GSX_ZH_CN = (function initGsxChinese(root, factory) {
   const api = factory();
 
@@ -646,6 +646,35 @@ var GSX_ZH_CN = (function initGsxChinese(root, factory) {
 });
 
 
+
+(function installGsxChineseObserver() {
+  if (typeof document === 'undefined' || typeof MutationObserver === 'undefined') return;
+  function translateTree(root) {
+    var walker, node;
+    if (!root || !window.GSX_ZH_CN) return;
+    walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT, null, false);
+    while ((node = walker.nextNode())) {
+      if (node.parentNode && /^(SCRIPT|STYLE|TEXTAREA)$/i.test(node.parentNode.nodeName)) continue;
+      node.nodeValue = window.GSX_ZH_CN.translateText(node.nodeValue);
+    }
+    if (root.nodeType === 1) {
+      ['title', 'placeholder', 'aria-label', 'data-tooltip'].forEach(function (name) {
+        if (root.hasAttribute(name)) root.setAttribute(name, window.GSX_ZH_CN.translateText(root.getAttribute(name)));
+      });
+    }
+  }
+  function start() {
+    translateTree(document.body);
+    new MutationObserver(function (records) {
+      records.forEach(function (record) {
+        if (record.type === 'characterData') translateTree(record.target);
+        record.addedNodes.forEach(translateTree);
+      });
+    }).observe(document.body, { childList: true, subtree: true, characterData: true });
+  }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', start); else start();
+}());
+
 // Polyfill for AbortController and AbortSignal if not available
 if (typeof AbortController === 'undefined') {
   class AbortSignal {
@@ -1002,6 +1031,16 @@ const SIMVAR_SIMBRIEF_SUCCESS = "L:FSDT_GSX_SIMBRIEF_SUCCESS";
 const SIMBRIEF_ERR_SLOT_CHUNKS = 32;
 const SIMVAR_GSX_OUTDATED = "L:FSDT_GSX_OUTDATED";
 const SIMVAR_GSX_HOTFIX_STATUS = "L:FSDT_GSX_HOTFIX_STATUS"; // 0=none, 1=downloading, 2=ready
+// FSDT-42: a newer Python package (GSX.pyz / common.pyz) was downloaded
+// from the online update channel and staged as <name>.pyz.new, but the
+// running interpreter still holds the OLD archive — the download happens
+// after boot has already selected and opened it. Set by GSX from
+// Couatl.pendingAddOnUpdates(). Applying it is just "Restart Couatl":
+// promotion runs at the top of couatl_main, so the restart the panel
+// already offers IS the apply action — no sim restart involved. Unlike
+// legacy there is no equivalent for Couatl.wasm itself; the marketplace
+// / content library updates the WASM module on its own.
+const SIMVAR_GSX_UPDATE_PENDING = "L:FSDT_GSX_UPDATE_PENDING";
 // Pulsed to 1 by the panel when the user clicks the "Apply hotfix"
 // banner. Python watches with changed=True at 1 Hz, runs
 // _applyHotfix (which exits for the boot-side restarter to apply
@@ -1021,7 +1060,6 @@ const SIMVAR_GSX_TESTVERSION = "L:FSDT_GSX_TESTVERSION";
 const SIMVAR_GSX_VERSION_MAJOR = "L:FSDT_GSX_VERSION_MAJOR";
 const SIMVAR_GSX_VERSION_MINOR = "L:FSDT_GSX_VERSION_MINOR";
 const SIMVAR_GSX_VERSION_BUILD = "L:FSDT_GSX_VERSION_BUILD";
-const PATCH_TARGET_GSX_VERSION = "4.0.14";
 const SIMVAR_GSX_REMOTE_VERSION_MAJOR = "L:FSDT_GSX_REMOTE_VERSION_MAJOR";
 const SIMVAR_GSX_REMOTE_VERSION_MINOR = "L:FSDT_GSX_REMOTE_VERSION_MINOR";
 const SIMVAR_GSX_REMOTE_VERSION_BUILD = "L:FSDT_GSX_REMOTE_VERSION_BUILD";
@@ -1662,10 +1700,6 @@ class IngamePanelGSX extends TemplateElement
 			TabMenuItem.prototype._gsxOnValidatePatched = true;
 		}).catch(() => {});
 		this.ingameUi = this.querySelector('ingame-ui');
-		// MSFS can construct this panel after DOMContentLoaded has already
-		// been skipped by the Coherent surface. Reapply static labels here
-		// so the initial loading and remote-control placeholders are localized.
-		GSX_ZH_CN.translateStaticDocument(document);
 
 		// Janitor wiring (scaler-era plumbing, kept inert): the
 		// debounced listener + watchdog only run _applyPanelScale's
@@ -2781,9 +2815,7 @@ class IngamePanelGSX extends TemplateElement
 		const remoteMajor = SimVar.GetSimVarValue(SIMVAR_GSX_REMOTE_VERSION_MAJOR, "number");
 		const remoteMinor = SimVar.GetSimVarValue(SIMVAR_GSX_REMOTE_VERSION_MINOR, "number");
 		const remoteBuild = SimVar.GetSimVarValue(SIMVAR_GSX_REMOTE_VERSION_BUILD, "number");
-		this.gsxVersionString = (major || minor || build)
-			? major + "." + minor + "." + build
-			: PATCH_TARGET_GSX_VERSION;
+		this.gsxVersionString = major + "." + minor + "." + build;
 		this.gsxRemoteVersionString = remoteMajor + "." + remoteMinor + "." + remoteBuild;
 
 		// Populate the static brand cell's version overlay (`.tv`
@@ -2799,7 +2831,13 @@ class IngamePanelGSX extends TemplateElement
 		console.log("GSX Installed version = " + this.gsxVersionString );
 		console.log("GSX Remote version = " + this.gsxRemoteVersionString );
 
-		// Banner priority: receipt > outdated/test > hotfix. Only one
+		// Banner priority: receipt > update-pending > outdated/test >
+		// hotfix. The FSDT-42 update sits above the version warnings
+		// because it is the only one of them the user can resolve from
+		// the panel itself — the outdated / test banners just report a
+		// state that needs the Addon Manager. Once applied it stops
+		// showing (the .pyz.new is gone after promotion) and whatever
+		// was underneath reappears on the next refresh. Only one
 		// banner can show in #outdatedMsg at a time, so the receipt
 		// notification preempts the standing warnings — it's the most
 		// time-relevant signal (user just paid for a service and
@@ -2811,6 +2849,8 @@ class IngamePanelGSX extends TemplateElement
 		// the banner slot.
 		if (this._receiptData) {
 			this.showReceiptBanner();
+		} else if (SimVar.GetSimVarValue(SIMVAR_GSX_UPDATE_PENDING, "number") != 0) {
+			this.showAddOnUpdateBanner();
 		} else if (this.gsxOutdated != 0) {
 			this.showOutdatedWarning();
 		} else if (this._hasHotfix()) {
@@ -3354,7 +3394,6 @@ class IngamePanelGSX extends TemplateElement
 	
 	_setSimBriefStatus(text)
 	{
-		text = GSX_ZH_CN.translateText(text);
 		// Single setter for the SimBrief status detail. Writes the
 		// text into the in-button .simbrief-status span, then
 		// schedules an overflow check next frame — when the span's
@@ -3517,7 +3556,13 @@ class IngamePanelGSX extends TemplateElement
 		}, 200);
 	}
 
-	closeWithChoice(choice)
+	// `restartMessage` overrides the loading-screen text for the
+	// CHOICE_CONTEXT_CLOSE_RESTART_ENGINE branch only. The restart itself is
+	// identical; what differs is WHY the user asked for it, and "Restarting
+	// GSX" tells someone who just clicked "apply the update" nothing about
+	// whether their update is being applied. Optional so all twelve existing
+	// callers keep the generic wording.
+	closeWithChoice(choice, restartMessage)
 	{
 		// Any menu choice (result pick, Back, Escape-cancel) ends a live
 		// gate search — drop the search box + release input capture
@@ -3538,7 +3583,7 @@ class IngamePanelGSX extends TemplateElement
 			// A 10s safety cap proceeds anyway in case the simvar
 			// transition is missed.
 			this.setMenuChoiceVar(choice);
-			this._enterRestartingState("Restarting GSX, please wait...");
+			this._enterRestartingState(restartMessage || "Restarting GSX, please wait...");
 			return;
 		}
 		if (choice == CHOICE_SIMBRIEF_RELOAD)
@@ -3640,7 +3685,7 @@ class IngamePanelGSX extends TemplateElement
 		if (!this._progressLabels) {
 			const raw = this.readStringSlot("LOADING_LABELS",
 				IngamePanelGSX.LOADING_LABELS_MAX_CHUNKS);
-			if (raw) this._progressLabels = raw.split("\n").map((label) => GSX_ZH_CN.translateText(label));
+			if (raw) this._progressLabels = raw.split("\n");
 		}
 
 		// Get-or-create the bars container — lazily, on the first
@@ -3749,7 +3794,7 @@ class IngamePanelGSX extends TemplateElement
 			fill.style.width = progress + "%";
 			if (progress >= 100) {
 				fill.classList.add("done");
-				pct.textContent = GSX_ZH_CN.translateText("Done");
+				pct.textContent = "Done";
 			} else {
 				pct.textContent = progress.toFixed(0) + "%";
 			}
@@ -4300,7 +4345,7 @@ class IngamePanelGSX extends TemplateElement
 			return; // stale duplicate (double listener, resync replay)
 		}
 		this._busLastSeq[msg.surface] = msg.seq;
-		const data = GSX_ZH_CN.translateSurface(msg.surface, msg.data || {});
+		const data = msg.data || {};
 		this._busCache[msg.surface] = data;
 		this._enterBusMode();
 		// Contain per-surface render exceptions — one bad payload must
@@ -4487,7 +4532,6 @@ class IngamePanelGSX extends TemplateElement
 
 	fileLoaded(text)
 	{
-		text = GSX_ZH_CN.translateMenuPayload(text);
 		const textLines = text.split("\n");
 		this.nEntries = textLines.length - 1;
 		this.currentTextLines = textLines; // Store for showMenu to use
@@ -4671,7 +4715,6 @@ class IngamePanelGSX extends TemplateElement
 
 	_applyMenuDocument(content, viaBus)
 	{
-		content = GSX_ZH_CN.translateHtmlPayload(content);
 		if (!this.menuDocumentFrame) return;
 		// Full-page document mode: Python marks a document that should
 		// own the whole panel (the WASM "View Log" page) with
@@ -4854,7 +4897,6 @@ class IngamePanelGSX extends TemplateElement
 
 	_applyMenuHtml(content)
 	{
-		content = GSX_ZH_CN.translateHtmlPayload(content);
 		if (!this.menuButtonsHost || !this.dynamicButtons) return;
 		if (this._hasRenderableContent(content)) {
 			// Rich layout takes over the dynamic area: mount the
@@ -5006,7 +5048,7 @@ class IngamePanelGSX extends TemplateElement
 				// or by its own timeout that might have raced with completion.
 				if (!currentControllerForThisCheck.signal.aborted) {
 					if (response.ok) {
-						const responseText = GSX_ZH_CN.translateMenuPayload(await response.text());
+						const responseText = await response.text();
 						const textLines = responseText.split("\n");
 
 						if (textLines.length > 2 && !this.isMenuContentDefault(textLines)) {
@@ -5653,7 +5695,6 @@ class IngamePanelGSX extends TemplateElement
 
 	_applyStatusHtml(html)
 	{
-		html = GSX_ZH_CN.translateHtmlPayload(html);
 		// Shared applier — fed by the file fetch (legacy/dev) and the
 		// CommBus push (MSFS2024 production). Body unchanged from the
 		// original reloadStatus fetch callback.
@@ -5766,7 +5807,6 @@ class IngamePanelGSX extends TemplateElement
 
 	_applyMenuLiveHtml(html)
 	{
-		html = GSX_ZH_CN.translateHtmlPayload(html);
 		// Shared applier — fed by the file fetch (legacy/dev) and the
 		// CommBus push (MSFS2024 production). Body unchanged from the
 		// original reloadMenuLive fetch callback.
@@ -5843,7 +5883,6 @@ class IngamePanelGSX extends TemplateElement
 
 	_applySettingsHtml(html)
 	{
-		html = GSX_ZH_CN.translateHtmlPayload(html);
 		// Shared applier — fed by the file fetch (legacy/dev) and the
 		// CommBus push (MSFS2024 production). Body unchanged from the
 		// original reloadSettings fetch callback, including the tab-
@@ -6402,7 +6441,6 @@ class IngamePanelGSX extends TemplateElement
 
 	showLoadingMenu(text = "")
 	{
-		text = GSX_ZH_CN.translateText(text);
 		this.isLoading = true; // Set loading flag
 		this._removeTooltip();
 
@@ -6716,6 +6754,39 @@ class IngamePanelGSX extends TemplateElement
 			onClick);
 	}
 
+	// FSDT-42. Same shape as the hotfix-ready banner: something was
+	// downloaded in the background and one click applies it. The click
+	// goes through the very same path as the bottom bar's "Restart
+	// Couatl" button (button14 → closeWithChoice(13)) rather than a new
+	// mechanism — that path already handles the awkward part, namely
+	// keeping the loading screen up while the dying engine lingers for
+	// ~2s before COUATL_STARTED drops.
+	//
+	// Deliberately NOT auto-applied: a restart mid-turnaround would
+	// abort whatever service is running. The user picks the moment.
+	showAddOnUpdateBanner()
+	{
+		// Kept to ONE line, and therefore kept short — same length as the
+		// outdated banner's text, which is the proven fit at this font
+		// size. The original wording ("...click here to restart and
+		// apply") wrapped, and a wrapped message also grows the solid
+		// plate to the full banner width, swallowing the striped margin
+		// on the left. See .gsx-update-banner in the CSS.
+		this._showBanner(
+			'gsx-testversion-warning-banner gsx-update-banner',
+			'gsx-testversion-warning-message',
+			"GSX update downloaded - click to restart and apply",
+			null,
+			() => {
+				console.log("[GSX] update banner clicked — restarting Couatl to apply");
+				// Mirrors the hotfix banner's "Applying hotfix, please wait...":
+				// the restart IS the apply step (promotion runs at the top of
+				// couatl_main), so the wait should name that, not the mechanism.
+				this.closeWithChoice(CHOICE_CONTEXT_CLOSE_RESTART_ENGINE,
+					"Applying update, please wait...");
+			});
+	}
+
 	updateSimBriefButton()
 	{
 		if (this.isLoading || this.remoteControl)
@@ -6752,7 +6823,7 @@ class IngamePanelGSX extends TemplateElement
 				this.simBriefBtn.style.background = "#008000"; // Green for success
 				this.simBriefBtn.style.color = "#FFFFFF";
 				if (this.simBriefBtnLabel) {
-					this.simBriefBtnLabel.textContent = GSX_ZH_CN.translateText("SimBrief OK");
+					this.simBriefBtnLabel.textContent = "SimBrief OK";
 				}
 				this._setSimBriefStatus("");
 			}
@@ -6765,12 +6836,12 @@ class IngamePanelGSX extends TemplateElement
 				// into the JS-bridge SIMBRIEF_ERR slot. Replaces the
 				// old code → message map: Python is now the single
 				// source of truth, JS just renders whatever's there.
-				const errMsg = GSX_ZH_CN.translateText(this.readStringSlot("SIMBRIEF_ERR", SIMBRIEF_ERR_SLOT_CHUNKS));
+				const errMsg = this.readStringSlot("SIMBRIEF_ERR", SIMBRIEF_ERR_SLOT_CHUNKS);
 
 				this.simBriefBtn.style.background = "#F02020"; // Red for error/issue
 				this.simBriefBtn.style.color = "#FFFFFF";
 				if (this.simBriefBtnLabel) {
-					this.simBriefBtnLabel.textContent = GSX_ZH_CN.translateText("Reload SimBrief");
+					this.simBriefBtnLabel.textContent = "Reload SimBrief";
 				}
 				this._setSimBriefStatus(errMsg || "Unknown SimBrief status.");
 			}
@@ -6782,7 +6853,6 @@ class IngamePanelGSX extends TemplateElement
 
 	tooltipLoaded(text, timeOut)
 	{
-		text = GSX_ZH_CN.translateText(text);
 		if (text != '' && timeOut > 0)
 		{
 			this._notify(text, timeOut);
@@ -6848,7 +6918,7 @@ class IngamePanelGSX extends TemplateElement
 		// the text is never parsed as HTML.
 		if (this.pagePrompt) {
 			const title = textLines[0] || "";
-			const subtitle = GSX_ZH_CN.translateText(this.readStringSlot("MENU_SUBTITLE", MENU_SUBTITLE_MAX_CHUNKS) || "");
+			const subtitle = this.readStringSlot("MENU_SUBTITLE", MENU_SUBTITLE_MAX_CHUNKS) || "";
 			this.pagePrompt.innerHTML = "";
 			const main = document.createElement("span");
 			main.className = "title-main";
