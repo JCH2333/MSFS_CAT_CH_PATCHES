@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="utf-8" />
+	<link rel="stylesheet" href="/SCSS/common.css" />
+	<link rel="stylesheet" href="P42ChasePlane.css" />
+
+	<script>window.L_DISABLE_3D = true;</script>
+	<script type="text/javascript" src="libs/leaflet/leaflet.js"></script>
+	<link rel="stylesheet" href="libs/leaflet/leaflet.css" />
+	<script src="libs/leaflet/tilelayer-canvas.min.js"></script>
+
+	<script type="text/javascript" src="libs/turf/turf.min.js"></script>
+
+	<script type="text/javascript" src="/JS/coherent.js"></script>
+	<script type="text/javascript" src="/JS/common.js"></script>
+	<script type="text/javascript" src="/JS/dataStorage.js"></script>
+	<script type="text/javascript" src="/JS/buttons.js"></script>
+	<script type="text/javascript" src="/JS/inputs.js"></script>
+	<script type="text/javascript" src="/JS/simvar.js"></script>
+	<script type="text/javascript" src="/JS/Services/ToolBarPanels.js"></script>
+	<script type="text/javascript" src="/JS/Services/Community.js"></script>
+	<script type="text/javascript" src="/JS/Services/GenericDataListener.js"></script>
+
+	<script type="text/html" import-script="/templates/virtualScroll/virtualScroll.js"></script>
+
+	<link rel="import" href="/templates/optionsmenu/range/range.html">
+
+	<link rel="import" href="/templates/ToggleButton/ToggleButton.html" />
+	<link rel="import" href="/templates/NewPushButton/NewPushButton.html" />
+	<link rel="import" href="/templates/NewListButton/NewListButton.html" />
+	<link rel="import" href="/templates/OptionsListContent/OptionsListContent.html" />
+	<link rel="import" href="/templates/uiInput/uiInput.html" />
+
+	<link rel="import" href="/templates/ingameUi/ingameUi.html" />
+	<link rel="import" href="/templates/ingameUiHeader/ingameUiHeader.html" />
+	<link rel="import" href="/templates/virtualScroll/virtualScroll.html" />
+
+	<style>
+		body {
+			transition: none !important;
+		}
+
+		html body #loading_screen svg {
+			width: 8em;
+			animation: loading_screen_zoom 2s 0.1s ease-out forwards !important;
+		}
+
+		html body #loading_screen svg path {
+			stroke-dasharray: 1000;
+			stroke-dashoffset: 1000;
+			stroke-width: 0.1em;
+			stroke: #FFFFFF;
+			fill: transparent;
+			animation: loading_screen_draw 2s 0.1s ease-out forwards !important;
+		}
+
+		html body #loading_screen svg path.s1 {
+			animation-delay: 0.2s;
+		}
+
+		html body #loading_screen svg path.s2 {
+			animation-delay: 0.4s;
+		}
+
+		html body #loading_screen svg path.s3 {
+			animation-delay: 0.6s;
+		}
+
+		html body #loading_screen svg path.s4 {
+			animation-delay: 0.8s;
+		}
+
+		@keyframes loading_screen_zoom {
+			to {
+				transform: scale(1.3);
+			}
+		}
+
+		@keyframes loading_screen_draw {
+			to {
+				stroke-dashoffset: 0;
+			}
+		}
+
+		html body #loading_screen .status {
+			position: absolute;
+			bottom: 2em;
+			left: 50%;
+			opacity: 0;
+			transform: translateX(-50%);
+		}
+
+		html body #loading_screen .status.visible {
+			opacity: 1;
+			transition: opacity 0.5s;
+		}
+
+		html body #loading_screen .status .status_missing {
+			font-size: 0.58em;
+			line-height: 1.35;
+			text-align: center;
+			color: #ffb1b1;
+			white-space: pre-line;
+			margin-bottom: 0.55em;
+		}
+
+		html body #loading_screen .status .status_dots {
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			flex-wrap: wrap;
+		}
+
+		html body #loading_screen .status .status_dots div {
+			display: inline-block;
+			width: 0.4em;
+			height: 0.4em;
+			border-radius: 50%;
+			background: var(--color, #330000);
+			margin: 0.1em;
+			transition: background 0.5s;
+		}
+	</style>
+
+</head>
+
+<body class="border-box">
+	<ingamepanel-custom>
+		<ingame-ui id="p42_chaseplane_panel" panel-id="PANEL_IMMERSION" title="" class="ingameUiFrame" content-fit="true" auto-inside="" resize="both" data-input-group="INGAME-UI" min-width="500" min-height="550">
+			<div id="app"></div>
+		</ingame-ui>
+	</ingamepanel-custom>
+	<script type="text/javascript" src="P42ChasePlane.js"></script>
+	<script type="text/javascript" src="ChasePlane.zh-CN.js"></script>
+	<div id="loading_screen" class="loading_screen" style="display: flex; align-items: center; justify-content: center; position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: radial-gradient(circle, rgba(0,0,0,0.3) 0%, rgba(127,127,127,0.3) 100%); z-index: 1000;">
+		<svg viewBox="0 0 256 256">
+			<path class="s1" d="M234.941404,21.0586151c-4.078128-4.0781264-10.690008-4.0781264-14.768136,0L43.5685525,197.6632616c-4.0780554,4.0780538-4.0780554,10.6900038,0,14.7680577l.0000726.0000726c4.0780554,4.0780538,10.690008,4.0780538,14.7680634-.0000726L234.941404,35.8267453c4.078128-4.0781264,4.078128-10.6900038,0-14.7681302Z" />
+			<path class="s2" d="M212.0210763,95.5372946c-3.6482516-3.6482502-9.5632428-3.6482502-13.2114945,0l-58.0332347,58.0334298c-3.6481791,3.6482502-3.6481791,9.5632391.0000726,13.2114167,3.6482516,3.6482502,9.5632428,3.6482502,13.2114219,0l58.0332347-58.0333572c3.6482516-3.6482502,3.6481791-9.5632391,0-13.2114893Z" />
+			<path class="s3" d="M213.2369667,142.6718427c-3.379207-3.3792056-8.857935-3.3792056-12.2371419,0l-36.048358,36.048344c-3.379207,3.3791331-3.379207,8.8579315,0,12.2371372s8.8580075,3.3792056,12.2372145,0l36.048358-36.048344c3.3791344-3.3792056,3.3791344-8.8579315,0-12.2371372h-.0000726Z" />
+			<path class="s4" d="M201.9213409,187.9311348l-15.4759841,15.475978c-2.4974633,2.4974623-2.4974633,6.5466303,0,9.0440926s6.5466329,2.4974623,9.0440962,0l15.4759841-15.475978c2.4974633-2.4974623,2.4974633-6.5466303,0-9.0440926s-6.5466329-2.4974623-9.0440962,0Z" />
+			<path class="s1" d="M82.7400642,211.6068395l-15.4759841,15.475978c-2.4974633,2.4974623-2.4974633,6.5466303,0,9.0440201v.0000726c2.4974633,2.4973897,6.5466329,2.4974623,9.0440962,0l15.4759841-15.4760506c2.4974633-2.4974623,2.4974633-6.5465577,0-9.0440201s-6.5466329-2.4974623-9.0440962,0Z" />
+			<path class="s1" d="M19.8730975,188.7358735v.0000726c2.4974633,2.4973897,6.5466329,2.4974623,9.0440962,0l15.4759841-15.4760506c2.4974633-2.4974623,2.4974633-6.5465577,0-9.0440201s-6.5466329-2.4974623-9.0440962,0l-15.4759841,15.475978c-2.4974633,2.4974623-2.4974633,6.5466303,0,9.0440201Z" />
+			<path class="s2" d="M89.2179662,115.2237803c3.6482516,3.6482502,9.5632428,3.6482502,13.2114945,0l58.0331621-58.0334298c3.6482516-3.6482502,3.6482516-9.5632391,0-13.2114893-3.6482516-3.6481776-9.5632428-3.6481776-13.2114945.0000726l-58.0331621,58.0333572c-3.6482516,3.6482502-3.6482516,9.5632391,0,13.2114893Z" />
+			<path class="s3" d="M65.042629,91.0484525c3.379207,3.3792056,8.857935,3.3792056,12.2371419.0000726l36.0484306-36.048344c3.379207-3.3792056,3.379207-8.8579315,0-12.2371372-3.379207-3.3792056-8.857935-3.3792056-12.2371419-.0000726l-36.0484306,36.048344c-3.379207,3.3791331-3.379207,8.8579315,0,12.2371372Z" />
+			<path class="s4" d="M52.5929076,69.5546434l15.4759841-15.4759055c2.4974633-2.4974623,2.4974633-6.5466303,0-9.0440926s-6.5466329-2.4974623-9.0440962,0l-15.4759841,15.4759055c-2.4974633,2.4974623-2.4974633,6.5466303,0,9.0440926s6.5466329,2.4974623,9.0440962,0Z" />
+		</svg>
+		<div class="status">
+			<div class="status_missing"></div>
+			<div class="status_dots">
+				<div></div>
+				<div></div>
+				<div></div>
+				<div></div>
+				<div></div>
+				<div></div>
+				<div></div>
+				<div></div>
+				<div></div>
+				<div></div>
+				<div></div>
+				<div></div>
+			</div>
+		</div>
+	</div>
+	<script>
+		document.addEventListener("DOMContentLoaded", () => {
+
+			setTimeout(() => {
+
+				if (!document.body.classList.contains("ready")) {
+
+					// set visible on status
+					document.querySelector(".loading_screen .status").classList.add("visible");
+
+					// update status
+					let status_check_interval;
+					status_check_interval = setInterval(() => {
+						let status = [
+							{ label: "Camera mode", value: SimVar.GetSimVarValue("CAMERA STATE", "Enum"), check: (x) => { return x == 2; } },
+							{ label: "Toolbar", value: SimVar.GetSimVarValue("L:p42_cp_load_toolbar", "Number"), check: (x) => { return x; } },
+							{ label: "Overlay", value: SimVar.GetSimVarValue("L:p42_cp_load_overlay", "Number"), check: (x) => { return x; } },
+							{ label: "Authentication", value: SimVar.GetSimVarValue("L:p42_cp_load_auth1", "Number"), check: (x) => { return x == 1 || x == 2; } },
+							{ label: "Hook state", value: SimVar.GetSimVarValue("L:p42_cp_load_hooked", "Number"), check: (x) => { return x; } },
+							{ label: "Camera definitions", value: SimVar.GetSimVarValue("L:p42_cp_load_camera_defs", "Number"), check: (x) => { return x; } },
+							{ label: "Cloud sync", value: SimVar.GetSimVarValue("L:p42_cp_load_cloud_sync", "Number"), check: (x) => { return x; } },
+							{ label: "Vehicle", value: SimVar.GetSimVarValue("L:p42_cp_load_vehicle", "Number"), check: (x) => { return x; } },
+							{ label: "Eyepoint", value: SimVar.GetSimVarValue("L:p42_cp_load_eyepoint", "Number"), check: (x) => { return x; } },
+							{ label: "Groups library", value: SimVar.GetSimVarValue("L:p42_cp_load_groups_lib", "Number"), check: (x) => { return x; } },
+							{ label: "Views library", value: SimVar.GetSimVarValue("L:p42_cp_load_views_lib", "Number"), check: (x) => { return x; } },
+							{ label: "Flight data", value: SimVar.GetSimVarValue("L:p42_cp_load_flight", "Number"), check: (x) => { return x; } },
+						];
+
+						let status_divs = document.querySelectorAll(".loading_screen .status .status_dots div");
+						let missing_items = [];
+						for (let i = 0; i < status_divs.length; i++) {
+							const status_div = status_divs[i];
+							const status_item = status[i];
+							const v = status_item.check(status_item.value);
+
+							if(v) {
+								status_div.style.setProperty('--color', '#00FF00');
+							} else {
+								status_div.style.setProperty('--color', '#bb0000');
+								missing_items.push(status_item.label);
+							}
+
+						}
+
+						const missing_status_div = document.querySelector(".loading_screen .status .status_missing");
+						if (missing_status_div) {
+							missing_status_div.textContent = missing_items.join("\n");
+						}
+
+						// if body.ready, stop interval
+						if (document.body.classList.contains("ready")) {
+							clearInterval(status_check_interval);
+						}
+					}, 1000);
+				}
+
+			}, 8000);
+
+		});
+	</script>
+</body>
+
+</html>
