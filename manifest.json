@@ -1,48 +1,8 @@
 {
   "schemaVersion": 1,
-  "catalogVersion": "2026.08.08.5",
-  "updatedAt": "2026-08-08T14:00:00Z",
+  "catalogVersion": "2026.08.09.1",
+  "updatedAt": "2026-08-09T14:02:11.295Z",
   "patches": [
-    {
-      "id": "fsrealistic-plus-zh-cn",
-      "name": "FSRealistic+ 简体中文",
-      "summary": "FSRealistic+ 1.1.0 面板、设置、效果与诊断界面简体中文补丁",
-      "version": "1.1.0",
-      "addonVersion": "1.1.9",
-      "status": "published",
-      "compatibility": [
-        "MSFS 2024"
-      ],
-      "targetHint": "请选择 rkapps-fsrealistic 安装目录",
-      "targetFolders": [
-        "rkapps-fsrealistic"
-      ],
-      "releaseNotes": [
-        "首次发布",
-        "覆盖主面板、设置、效果名称、提示与诊断窗口"
-      ],
-      "fingerprint": [
-        {
-          "relativePath": "layout.json",
-          "sha256": "9e110c0faa621f986281a976d81d309cbe9a8c3cc8b01db590c1fd82a05bc1aa"
-        },
-        {
-          "relativePath": "html_ui/InGamePanels/FSRealistic/FSRealistic.html",
-          "sha256": "1cf60e214dd2c685b64dee66c45062fd13719772af8a03ae466d5acf58f5f94e"
-        },
-        {
-          "relativePath": "html_ui/InGamePanels/FSRealistic/FSRealistic.zh-CN.js",
-          "sha256": "b4938e1d3fe27298a8910d6e0308a5fe57194b17aa2efec3e2e7d45754f3789a"
-        }
-      ],
-      "package": {
-        "releaseTag": "fsrealistic-plus-zh-cn-v1.1.0",
-        "assetName": "msfs-cat-ch-fsrealistic-plus-zh-cn-v1.1.0.zip",
-        "sha256": "5bad0c91cbad5622d08a2b8121be7707faccd4ff433a60e3a3ff6cbff316ee2f",
-        "size": 15187,
-        "contentRoot": ""
-      }
-    },
     {
       "id": "gsx-pro-zh-cn",
       "name": "GSX Pro 简体中文",
@@ -77,46 +37,6 @@
         "assetName": "msfs-cat-ch-gsx-pro-zh-cn-v1.2.0.zip",
         "sha256": "83191e180a1ef5faace62877b386c95551e3d4574c5086854ead57237dcfad24",
         "size": 420148,
-        "contentRoot": ""
-      }
-    },
-    {
-      "id": "chaseplane-zh-cn",
-      "name": "ChasePlane 简体中文",
-      "summary": "ChasePlane 26.32.4 主面板、相机控制与配置界面简体中文补丁",
-      "version": "1.1.0",
-      "addonVersion": "26.32.4",
-      "status": "published",
-      "compatibility": [
-        "MSFS 2024"
-      ],
-      "targetHint": "请选择 p42-util-chaseplane 安装目录",
-      "targetFolders": [
-        "p42-util-chaseplane"
-      ],
-      "releaseNotes": [
-        "适配 ChasePlane 26.32.4",
-        "保留新版本主面板结构并加载动态汉化脚本"
-      ],
-      "fingerprint": [
-        {
-          "relativePath": "layout.json",
-          "sha256": "8546652f8f04f4c67a669089a999e3f13d56605dab89e57003eb01304e011962"
-        },
-        {
-          "relativePath": "HTML_UI/InGamePanels/P42ChasePlane/P42ChasePlane.html",
-          "sha256": "d0d17cfaff2349bb993d6a7a45d58f3b22a0bc97d8802e0bda18f6e258a6faf1"
-        },
-        {
-          "relativePath": "HTML_UI/InGamePanels/P42ChasePlane/ChasePlane.zh-CN.js",
-          "sha256": "b9408bf7e663740e9c8a49e5dc8c12353f34a6fcdbc62d44a01d204923b50506"
-        }
-      ],
-      "package": {
-        "releaseTag": "chaseplane-zh-cn-v1.1.0",
-        "assetName": "msfs-cat-ch-chaseplane-zh-cn-v1.1.0.zip",
-        "sha256": "b7b38124347b1c7a675f3cdfd73e253dbedab7c2b6227632df64eb8f71aa7b83",
-        "size": 25087,
         "contentRoot": ""
       }
     }
