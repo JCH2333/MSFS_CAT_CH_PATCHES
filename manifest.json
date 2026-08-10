@@ -1,45 +1,46 @@
 {
-  "schemaVersion": 1,
-  "catalogVersion": "2026.08.10.1",
-  "updatedAt": "2026-08-10T00:00:00.000Z",
-  "patches": [
-    {
-      "id": "gsx-pro-zh-cn",
-      "name": "GSX Pro 简体中文",
-      "summary": "GSX Pro 4.0.15 菜单、设置与运行状态简体中文补丁",
-      "version": "1.2.1",
-      "addonVersion": "4.0.15",
-      "status": "published",
-      "compatibility": [
-        "MSFS 2020",
-        "MSFS 2024"
-      ],
-      "targetHint": "请选择 fsdreamteam-gsx-pro 安装目录",
-      "targetFolders": [
-        "fsdreamteam-gsx-pro"
-      ],
-      "releaseNotes": [
-        "适配 GSX Pro 4.0.15",
-        "补充加载页面、SimBrief 错误提示和保存当前位置等动态词条",
-        "修复版本号回退显示，兼容运行时版本尚未返回的情况"
-      ],
-      "fingerprint": [
-        {
-          "relativePath": "layout.json",
-          "sha256": "3e73b593c61ab63d08eab5dfa7cc7ca9eaff8b89baf66b74a373fdf8d9f3179f"
-        },
-        {
-          "relativePath": "html_ui/InGamePanels/FSDT_GSX_Panel/FSDT_GSX_Panel.js",
-          "sha256": "4abde98d2956992ef63ce8c41de5684f0a39e96810e2caaa49907f48c1cdf38e"
-        }
-      ],
-      "package": {
-        "releaseTag": "gsx-pro-zh-cn-v1.2.1",
-        "assetName": "msfs-cat-ch-gsx-pro-zh-cn-v1.2.1.zip",
-        "sha256": "acbcbbdf3170777fcb5a48468389683fa1d2b8970a9e485366c92348517087c5",
-        "size": 420399,
-        "contentRoot": ""
-      }
-    }
-  ]
+    "schemaVersion":  1,
+    "catalogVersion":  "2026.08.10.2",
+    "updatedAt":  "2026-08-10T04:00:00Z",
+    "patches":  [
+                    {
+                        "id":  "gsx-pro-zh-cn",
+                        "name":  "GSX Pro 简体中文",
+                        "summary":  "GSX Pro 4.0.15 菜单、设置与运行状态简体中文补丁",
+                        "version":  "1.2.2",
+                        "addonVersion":  "4.0.15",
+                        "status":  "published",
+                        "compatibility":  [
+                                              "MSFS 2020",
+                                              "MSFS 2024"
+                                          ],
+                        "targetHint":  "请选择 fsdreamteam-gsx-pro 安装目录",
+                        "targetFolders":  [
+                                              "fsdreamteam-gsx-pro"
+                                          ],
+                        "releaseNotes":  [
+                                             "适配 GSX Pro 4.0.15",
+                                             "补齐加载页面与 SimBrief 的动态词条",
+                                             "兼容 Unicode 省略号、空格和大小写变体",
+                                             "修正运行时版本尚未返回时显示为 v0.0.0 的问题"
+                                         ],
+                        "fingerprint":  [
+                                            {
+                                                "relativePath":  "layout.json",
+                                                "sha256":  "df0cee12e65a79cd402bf010f1f77c5d1133f009326ef010774777f0c145e35f"
+                                            },
+                                            {
+                                                "relativePath":  "html_ui/InGamePanels/FSDT_GSX_Panel/FSDT_GSX_Panel.js",
+                                                "sha256":  "02c6c1f2347066a2d02c35763ae3e2a94b95252f5fd21821fceef3065947ce85"
+                                            }
+                                        ],
+                        "package":  {
+                                        "releaseTag":  "gsx-pro-zh-cn-v1.2.2",
+                                        "assetName":  "msfs-cat-ch-gsx-pro-zh-cn-v1.2.2.zip",
+                                        "sha256":  "d7190a81b9b6068685172f853f5d61d6d51054c9a6780e31ff1dcb2637838611",
+                                        "size":  421240,
+                                        "contentRoot":  ""
+                                    }
+                    }
+                ]
 }
