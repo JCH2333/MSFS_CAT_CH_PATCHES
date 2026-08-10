@@ -32,7 +32,21 @@ test('keeps the GSX 4.0.15 official panel body intact and observes dynamic conte
   const hash = crypto.createHash('sha256').update(officialBody).digest('hex')
 
   assert.match(source, /installGsxChineseObserver/)
-  assert.equal(hash, '93246ef7212b7bbf624214e07a387087b1b67e501cee0ed9f75a960c41d62726')
+  assert.equal(hash, 'c844e707ec518c38fa9823654285ed1444565c50bd6adcbab2751e26a3926361')
+})
+
+test('translates the reported GSX loading, SimBrief, aircraft, and saved-position labels', () => {
+  const translator = loadTranslator()
+  assert.equal(translator.translateText('Loading GSX Menu, please wait...'), '正在加载 GSX 菜单，请稍候...')
+  assert.equal(translator.translateText("Can't read the aircraft type"), '无法读取飞机类型')
+  assert.equal(translator.translateText('Save current position...'), '保存当前位置...')
+  assert.equal(translator.translateText('Reload SimBrief'), '重新载入 SimBrief')
+})
+
+test('contains a GSX 4.0.15 version fallback for unavailable runtime SimVars', () => {
+  const source = fs.readFileSync(sourcePath, 'utf8')
+  assert.match(source, /GSX_FALLBACK_VERSION\s*=\s*"4\.0\.15"/)
+  assert.match(source, /this\.gsxVersionString\s*=\s*hasRuntimeVersion/)
 })
 
 test('translates dynamic parking counts with HTML non-breaking spaces', () => {

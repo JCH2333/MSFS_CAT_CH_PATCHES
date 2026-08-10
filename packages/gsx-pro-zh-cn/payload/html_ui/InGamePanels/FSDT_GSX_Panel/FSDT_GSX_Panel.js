@@ -1,4 +1,4 @@
-/* GSX Pro 4.0.15 Simplified Chinese patch v1.2.0. */
+/* GSX Pro 4.0.15 Simplified Chinese patch v1.2.1. */
 var GSX_ZH_CN = (function initGsxChinese(root, factory) {
   const api = factory();
 
@@ -42,6 +42,9 @@ var GSX_ZH_CN = (function initGsxChinese(root, factory) {
     ["Loading Aircraft data", "正在加载飞机数据"],
     ["Loading GSX Menu, please wait...", "正在加载 GSX 菜单，请稍候..."],
     ["Loading GSX Menu...", "正在加载 GSX 菜单..."],
+    ["Can't read the aircraft type", "无法读取飞机类型"],
+    ["Save current position...", "保存当前位置..."],
+    ["Save current position", "保存当前位置"],
     ["Checking Simbrief", "正在检查 SimBrief"],
     ["Checking SimBrief", "正在检查 SimBrief"],
     ["Initializing Couatl", "正在初始化 Couatl"],
@@ -790,7 +793,9 @@ const MAX_MESSAGE_QUEUE_LENGTH = 8;
 const CHOICE_CONTEXT_CLOSE_RESTART_ENGINE = 13; // Used in loadFileNoCache timeout
 const CHOICE_SIMBRIEF_RELOAD = 14; // Used in closeWithChoice for SimBrief reload action
 const CHOICE_SETTINGS = 12; // GSX Settings (button13) — kept named so closeWithChoice can skip hideMenu
-const SIMBRIEF_LOADING_TEXT = "Reloading SimBrief";
+const SIMBRIEF_LOADING_TEXT = "正在重新载入 SimBrief";
+const SIMBRIEF_RELOAD_TEXT = "重新载入 SimBrief";
+const GSX_FALLBACK_VERSION = "4.0.15";
 const DEFAULT_MENU_SUBTITLE_INDICATOR = "subtitle";
 const EXTERNAL_SYSTEM_TOGGLE_RELOAD_MENU = 1;
 const EXTERNAL_SYSTEM_TOGGLE_HIDE_MENU = 2;
@@ -2815,8 +2820,16 @@ class IngamePanelGSX extends TemplateElement
 		const remoteMajor = SimVar.GetSimVarValue(SIMVAR_GSX_REMOTE_VERSION_MAJOR, "number");
 		const remoteMinor = SimVar.GetSimVarValue(SIMVAR_GSX_REMOTE_VERSION_MINOR, "number");
 		const remoteBuild = SimVar.GetSimVarValue(SIMVAR_GSX_REMOTE_VERSION_BUILD, "number");
-		this.gsxVersionString = major + "." + minor + "." + build;
-		this.gsxRemoteVersionString = remoteMajor + "." + remoteMinor + "." + remoteBuild;
+		const hasRuntimeVersion = [major, minor, build].every(Number.isFinite)
+			&& (major !== 0 || minor !== 0 || build !== 0);
+		const hasRuntimeRemoteVersion = [remoteMajor, remoteMinor, remoteBuild].every(Number.isFinite)
+			&& (remoteMajor !== 0 || remoteMinor !== 0 || remoteBuild !== 0);
+		this.gsxVersionString = hasRuntimeVersion
+			? `${major}.${minor}.${build}`
+			: GSX_FALLBACK_VERSION;
+		this.gsxRemoteVersionString = hasRuntimeRemoteVersion
+			? `${remoteMajor}.${remoteMinor}.${remoteBuild}`
+			: GSX_FALLBACK_VERSION;
 
 		// Populate the static brand cell's version overlay (`.tv`
 		// inside #brandCell) with the freshly-resolved installed
@@ -3401,7 +3414,7 @@ class IngamePanelGSX extends TemplateElement
 		// gets a `title` attribute so the CSS hover tooltip
 		// surfaces the full text. The +1 px tolerance absorbs
 		// Coherent's older Chromium sub-pixel rounding.
-		const value = text || "";
+		const value = GSX_ZH_CN.translateText(text || "");
 		if (this.simBriefStatusSpan) {
 			this.simBriefStatusSpan.textContent = value;
 		}
@@ -6461,7 +6474,7 @@ class IngamePanelGSX extends TemplateElement
 		// confusing too. CSS `order: -1` on #pagePrompt renders it
 		// above loadingPrompt despite the HTML source order.
 		if (this.pagePrompt) {
-			this.pagePrompt.textContent = text || "Loading GSX Menu, please wait...";
+			this.pagePrompt.textContent = GSX_ZH_CN.translateText(text || "Loading GSX Menu, please wait...");
 			// Drop the MSFS-2024 blue gradient that gets applied as
 			// inline style on showMenu — for the loading title we want
 			// the default h3 dark backdrop, not the menu-active styling.
@@ -6841,7 +6854,7 @@ class IngamePanelGSX extends TemplateElement
 				this.simBriefBtn.style.background = "#F02020"; // Red for error/issue
 				this.simBriefBtn.style.color = "#FFFFFF";
 				if (this.simBriefBtnLabel) {
-					this.simBriefBtnLabel.textContent = "Reload SimBrief";
+					this.simBriefBtnLabel.textContent = SIMBRIEF_RELOAD_TEXT;
 				}
 				this._setSimBriefStatus(errMsg || "Unknown SimBrief status.");
 			}

@@ -1,13 +1,13 @@
 {
   "schemaVersion": 1,
-  "catalogVersion": "2026.08.09.1",
-  "updatedAt": "2026-08-09T14:02:11.295Z",
+  "catalogVersion": "2026.08.10.1",
+  "updatedAt": "2026-08-10T00:00:00.000Z",
   "patches": [
     {
       "id": "gsx-pro-zh-cn",
       "name": "GSX Pro 简体中文",
       "summary": "GSX Pro 4.0.15 菜单、设置与运行状态简体中文补丁",
-      "version": "1.2.0",
+      "version": "1.2.1",
       "addonVersion": "4.0.15",
       "status": "published",
       "compatibility": [
@@ -20,23 +20,24 @@
       ],
       "releaseNotes": [
         "适配 GSX Pro 4.0.15",
-        "保留 4.0.15 官方面板逻辑并监听动态文本"
+        "补充加载页面、SimBrief 错误提示和保存当前位置等动态词条",
+        "修复版本号回退显示，兼容运行时版本尚未返回的情况"
       ],
       "fingerprint": [
         {
           "relativePath": "layout.json",
-          "sha256": "510cc17460e0c94ebb72ccd9a56c371af20f5e7e31dbbeb6440037ac2276ef59"
+          "sha256": "3e73b593c61ab63d08eab5dfa7cc7ca9eaff8b89baf66b74a373fdf8d9f3179f"
         },
         {
           "relativePath": "html_ui/InGamePanels/FSDT_GSX_Panel/FSDT_GSX_Panel.js",
-          "sha256": "1f95f9a75132bebb9234838c8ca901936cab14e02be99e89e14d6e48619aaef7"
+          "sha256": "4abde98d2956992ef63ce8c41de5684f0a39e96810e2caaa49907f48c1cdf38e"
         }
       ],
       "package": {
-        "releaseTag": "gsx-pro-zh-cn-v1.2.0",
-        "assetName": "msfs-cat-ch-gsx-pro-zh-cn-v1.2.0.zip",
-        "sha256": "83191e180a1ef5faace62877b386c95551e3d4574c5086854ead57237dcfad24",
-        "size": 420148,
+        "releaseTag": "gsx-pro-zh-cn-v1.2.1",
+        "assetName": "msfs-cat-ch-gsx-pro-zh-cn-v1.2.1.zip",
+        "sha256": "acbcbbdf3170777fcb5a48468389683fa1d2b8970a9e485366c92348517087c5",
+        "size": 420399,
         "contentRoot": ""
       }
     }
