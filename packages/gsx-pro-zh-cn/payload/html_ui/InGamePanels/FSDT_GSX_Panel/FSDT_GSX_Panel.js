@@ -1,4 +1,4 @@
-/* GSX Pro 4.0.15 Simplified Chinese patch v1.2.1. */
+/* GSX Pro 4.0.15 Simplified Chinese patch v1.2.3. */
 var GSX_ZH_CN = (function initGsxChinese(root, factory) {
   const api = factory();
 
@@ -415,9 +415,38 @@ var GSX_ZH_CN = (function initGsxChinese(root, factory) {
     ).join("");
   }
 
+  function normalizeLookupText(value) {
+    return value
+      .replace(/\u00a0/g, " ")
+      .replace(/\u2026/g, "...")
+      .replace(/[’]/g, "'")
+      .replace(/\s+/g, " ")
+      .replace(/\.{4,}$/, "...");
+  }
+
   function translateCore(value) {
-    const direct = exact.get(value) || exactLower.get(value.toLowerCase());
+    const normalized = normalizeLookupText(value);
+    const direct = exact.get(value)
+      || exactLower.get(value.toLowerCase())
+      || exact.get(normalized)
+      || exactLower.get(normalized.toLowerCase());
     if (direct) return direct;
+
+    if (/^loading\s+gsx\s+menu(?:,\s*please\s+wait)?(?:\.|\u2026)*$/i.test(normalized)) {
+      return "正在加载 GSX 菜单，请稍候...";
+    }
+
+    if (/^reload\s+sim\s*brief(?:\.|\u2026)*$/i.test(normalized)) {
+      return "重新载入 SimBrief";
+    }
+
+    if (/^can'?t\s+read\s+the\s+aircraft\s+type(?:\.|\u2026)*$/i.test(normalized)) {
+      return "无法读取飞机类型";
+    }
+
+    if (/^save\s+current\s+position(?:\.|\u2026)*$/i.test(normalized)) {
+      return "保存当前位置";
+    }
 
     let match = value.match(/^([↑◀]\s*)(.+)$/);
     if (match) return match[1] + translateCore(match[2]);
@@ -2093,6 +2122,9 @@ class IngamePanelGSX extends TemplateElement
 					this.simBriefBtnLabel = this.simBriefBtn
 						? this.simBriefBtn.querySelector(".bottom-btn-label")
 						: null;
+					if (this.simBriefBtnLabel) {
+						this.simBriefBtnLabel.textContent = SIMBRIEF_RELOAD_TEXT;
+					}
 					// Status detail span — third column of the SimBrief
 					// button row. Renders the error text / flight-plan
 					// summary that used to live in a separate

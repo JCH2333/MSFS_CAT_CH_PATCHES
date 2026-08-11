@@ -25,14 +25,15 @@ function loadTranslator() {
   return context.module.exports
 }
 
-test('keeps the GSX 4.0.15 official panel body intact and observes dynamic content', () => {
+test('keeps the GSX 4.0.15 panel body free of external-link injection', () => {
   const source = fs.readFileSync(sourcePath, 'utf8')
   const marker = '// Polyfill for AbortController and AbortSignal if not available'
   const officialBody = source.slice(source.indexOf(marker))
   const hash = crypto.createHash('sha256').update(officialBody).digest('hex')
 
   assert.match(source, /installGsxChineseObserver/)
-  assert.equal(hash, 'c844e707ec518c38fa9823654285ed1444565c50bd6adcbab2751e26a3926361')
+  assert.doesNotMatch(source, /addChinesePatchCredit|msfs-cat-ch-credit|space\.bilibili\.com|window\.open/)
+  assert.equal(hash, 'd0a054b1937812e1a434be761d97b69da2334b8c46b6055560be7099a6d88b34')
 })
 
 test('translates the reported GSX loading, SimBrief, aircraft, and saved-position labels', () => {
