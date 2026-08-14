@@ -1,4 +1,4 @@
-/* GSX Pro 4.0.15 Simplified Chinese patch v1.2.3. */
+/* GSX Pro 4.0.15 Simplified Chinese patch v1.2.4. */
 var GSX_ZH_CN = (function initGsxChinese(root, factory) {
   const api = factory();
 
@@ -97,6 +97,10 @@ var GSX_ZH_CN = (function initGsxChinese(root, factory) {
     ["Request Deicing", "请求除冰服务"],
     ["Request Follow Me", "请求引导车"],
     ["Request Follow-Me", "请求引导车"],
+    ["Request FollowMe?", "请求引导车？"],
+    ["Request Progressive Taxi", "请求渐进式滑行"],
+    ["Show me this spot", "带我前往此处"],
+    ["Just warp me there", "直接传送到此处"],
     ["Request Water Service", "请求补水服务"],
     ["Request Lavatory Service", "请求清污服务"],
     ["Request Ground Power Unit", "请求地面电源"],
@@ -130,6 +134,21 @@ var GSX_ZH_CN = (function initGsxChinese(root, factory) {
     ["Pushback Right", "向右推出"],
     ["Tow forward", "向前牵引"],
     ["Quick Edit Pushback", "快速编辑推出路线"],
+    ["QuickEdit Pushback", "快速编辑推出"],
+    ["QuickEdit Pushback on Map", "在地图上快速编辑推出"],
+    ["Interrupt pushback?", "中断推出？"],
+    ["Return to parking", "返回停机位"],
+    ["Stop here and complete pushback...", "在此停止并完成推出..."],
+    ["Stop here and complete pushback procedure", "在此停止并完成推出流程"],
+    ["Select pushback direction", "选择推出方向"],
+    ["Facing NW on T14 (NL)", "面向西北，位于 T14（NL）"],
+    ["Straight Pushback (manual stop, max 100 m)", "直线推出（手动停止，最长 100 米）"],
+    ["Straight pushback (manual stop, max 100 m)", "直线推出（手动停止，最长 100 米）"],
+    ["Straight Pull pushback (manual stop, max 100 m)", "直线拉出（手动停止，最长 100 米）"],
+    ["Change parking or service", "更改停机位或服务"],
+    ["Stop Progressive Taxi", "停止渐进式滑行"],
+    ["Moving Map", "移动地图"],
+    ["[GSX] In position, please set parking brakes", "[GSX] 已就位，请设置停留刹车"],
     ["Set parking brakes", "设置停留刹车"],
     ["Release parking brakes", "松开停留刹车"],
     ["Confirm good engine start", "确认发动机启动正常"],
@@ -366,6 +385,7 @@ var GSX_ZH_CN = (function initGsxChinese(root, factory) {
     ["Aprons", "机坪"],
     ["Parking", "停机位"],
     ["Parkings", "停机位"],
+    ["Stands Not Edited", "未编辑的停机位"],
     ["Cargo Ramp", "货运机坪"],
     ["Cargo", "货运"],
     ["Passenger", "乘客"],
@@ -472,8 +492,14 @@ var GSX_ZH_CN = (function initGsxChinese(root, factory) {
     match = value.match(/^([\s\S]*?)\s*\(\s*(\d+)\s+suitable\s+parkings?\s*\)$/i);
     if (match) return `${translatePhraseList(match[1])}（${match[2]} 个适用停机位）`;
 
-    match = value.match(/^(\s*[^A-Za-z0-9]*\s*)Runway\s+(.+?)\s+Start$/i);
-    if (match) return `${match[1]}跑道 ${match[2]} 起点`;
+    match = value.match(/^(\s*[^A-Za-z0-9]*\s*)Runway\s+(.+?)\s+Start(?:\s+\[PLANNED\])?$/i);
+    if (match) {
+      const planned = /\s+\[PLANNED\]$/i.test(value);
+      return `${match[1]}跑道 ${match[2]} 起点${planned ? " [计划]" : ""}`;
+    }
+
+    match = value.match(/^Change Facility \[Runway\s+(.+?)\s+Start\]$/i);
+    if (match) return `更改位置 [跑道 ${match[1]} 起点]`;
 
     match = value.match(/^Our (.+?) is Parked$/i);
     if (match) return `本机 ${match[1]} 已停稳`;
@@ -6943,6 +6969,17 @@ class IngamePanelGSX extends TemplateElement
 		// Hide loading menu elements
 		if (this.loadingPrompt) this.loadingPrompt.style.display = "none";
 		if (this.loadingImage) this.loadingImage.style.display = "none";
+
+		// Preserve the source menu values for button choice handling and
+		// automation, but localize every value copied into the DOM. The
+		// MutationObserver cannot reliably see Coherent's custom-element
+		// subtree updates, so the rendering path must translate explicitly.
+		const localizeMenuText = (value) => {
+			const sourceText = value == null ? "" : String(value);
+			if (!window.GSX_ZH_CN || typeof window.GSX_ZH_CN.translateText !== "function") return sourceText;
+			return window.GSX_ZH_CN.translateText(sourceText);
+		};
+		const localizedTextLines = textLines.map(localizeMenuText);
 	
 		// Update page prompt. The main title comes from textLines[0]
 		// (mirror of the canonical ./menu file). An optional subtitle
@@ -6962,8 +6999,8 @@ class IngamePanelGSX extends TemplateElement
 		// createTextNode / createElement rather than innerHTML so
 		// the text is never parsed as HTML.
 		if (this.pagePrompt) {
-			const title = textLines[0] || "";
-			const subtitle = this.readStringSlot("MENU_SUBTITLE", MENU_SUBTITLE_MAX_CHUNKS) || "";
+			const title = localizedTextLines[0] || "";
+			const subtitle = localizeMenuText(this.readStringSlot("MENU_SUBTITLE", MENU_SUBTITLE_MAX_CHUNKS) || "");
 			this.pagePrompt.innerHTML = "";
 			const main = document.createElement("span");
 			main.className = "title-main";
@@ -7001,7 +7038,7 @@ class IngamePanelGSX extends TemplateElement
 					// Wrapped in `.option-keycap` so CSS can scale it
 					// smaller than the hotkey keycaps and keep the
 					// button's line height unchanged.
-					const labelSafe = String(textLines[i])
+					const labelSafe = String(localizedTextLines[i])
 						.replace(/&/g, "&amp;")
 						.replace(/</g, "&lt;")
 						.replace(/>/g, "&gt;");
@@ -7038,7 +7075,7 @@ class IngamePanelGSX extends TemplateElement
 					if (btn._lastHtml !== newHtml) {
 						btn.innerHTML = newHtml;
 						btn._lastHtml = newHtml;
-						console.log("Update menu item " + i + " content: " + textLines[i]);
+						console.log("Update menu item " + i + " content: " + localizedTextLines[i]);
 						// Visual-only hover tooltip: carries the
 						// full un-clamped label text via the `title`
 						// attribute, picked up by the CSS pseudo-
@@ -7048,7 +7085,7 @@ class IngamePanelGSX extends TemplateElement
 						// Defer the overflow check to next frame so
 						// layout is finalised; strip the title from
 						// labels that fit (no duplicate tooltip).
-						btn.setAttribute("title", textLines[i]);
+						btn.setAttribute("title", localizedTextLines[i]);
 						requestAnimationFrame(() => {
 							const lbl = btn.querySelector(".option-label");
 							if (!lbl) return;
