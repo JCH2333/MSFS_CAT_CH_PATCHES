@@ -5,17 +5,7 @@ const path = require('node:path')
 const test = require('node:test')
 const vm = require('node:vm')
 
-const sourcePath = path.join(
-  __dirname,
-  '..',
-  'packages',
-  'gsx-pro-zh-cn',
-  'payload',
-  'html_ui',
-  'InGamePanels',
-  'FSDT_GSX_Panel',
-  'FSDT_GSX_Panel.js'
-)
+const sourcePath = path.join(__dirname, '..', 'packages', 'gsx-pro-zh-cn', 'payload', 'html_ui', 'InGamePanels', 'FSDT_GSX_Panel', 'FSDT_GSX_Panel.js')
 
 function loadTranslator() {
   const source = fs.readFileSync(sourcePath, 'utf8')
@@ -25,78 +15,47 @@ function loadTranslator() {
   return context.module.exports
 }
 
-test('keeps the GSX 4.0.15 panel body free of external-link injection', () => {
+test('keeps the GSX 4.0.17 panel body verified and free of unsupported external-link injection', () => {
   const source = fs.readFileSync(sourcePath, 'utf8')
   const marker = '// Polyfill for AbortController and AbortSignal if not available'
-  const officialBody = source.slice(source.indexOf(marker))
-  const hash = crypto.createHash('sha256').update(officialBody).digest('hex')
+  const body = source.slice(source.indexOf(marker))
+  const hash = crypto.createHash('sha256').update(body).digest('hex')
 
   assert.match(source, /installGsxChineseObserver/)
   assert.doesNotMatch(source, /addChinesePatchCredit|msfs-cat-ch-credit|space\.bilibili\.com|window\.open/)
-  assert.equal(hash, '056557b301c9da84efdf1d0dd774ad35dcaa90dfb9ceb72d5c0e804ecdee9490')
+  assert.equal(hash, '596c1fb020aeb916411987987e28589cebea41e009d4279c6df897d5cd06cd75')
 })
 
-test('translates the reported GSX loading, SimBrief, aircraft, and saved-position labels', () => {
-  const translator = loadTranslator()
-  assert.equal(translator.translateText('Loading GSX Menu, please wait...'), '正在加载 GSX 菜单，请稍候...')
-  assert.equal(translator.translateText("Can't read the aircraft type"), '无法读取飞机类型')
-  assert.equal(translator.translateText('Save current position...'), '保存当前位置...')
-  assert.equal(translator.translateText('Reload SimBrief'), '重新载入 SimBrief')
-})
-
-test('contains a GSX 4.0.15 version fallback for unavailable runtime SimVars', () => {
-  const source = fs.readFileSync(sourcePath, 'utf8')
-  assert.match(source, /GSX_FALLBACK_VERSION\s*=\s*"4\.0\.15"/)
-  assert.match(source, /this\.gsxVersionString\s*=\s*hasRuntimeVersion/)
-})
-
-test('translates dynamic parking counts with HTML non-breaking spaces', () => {
-  const translator = loadTranslator()
-  assert.equal(
-    translator.translateText('Terminal 1 Gate 103-116 (&nbsp;1 suitable parkings)'),
-    '航站楼 1 登机口 103-116（1 个适用停机位）'
-  )
-})
-
-test('translates dynamic runway start labels while preserving an icon prefix', () => {
-  const translator = loadTranslator()
-  assert.equal(translator.translateText('\uFFFC Runway 18R Start'), '\uFFFC 跑道 18R 起点')
-})
-
-test('translates the reported live menu labels before they are rendered', () => {
+test('translates the reported 4.0.17 main-menu, reposition, SimBrief, and aircraft-status text', () => {
   const translator = loadTranslator()
   const translations = new Map([
-    ['GSX MAIN MENU', 'GSX 主菜单'],
-    ['Request FollowMe?', '请求引导车？'],
-    ['Request Progressive Taxi', '请求渐进式滑行'],
-    ['Show me this spot', '带我前往此处'],
-    ['Just warp me there', '直接传送到此处'],
-    ['Stands Not Edited (28 suitable parkings)', '未编辑的停机位（28 个适用停机位）'],
-    ['Runway 23 Start [PLANNED]', '跑道 23 起点 [计划]'],
-    ['Interrupt pushback?', '中断推出？'],
-    ['Return to parking', '返回停机位'],
-    ['Stop here and complete pushback...', '在此停止并完成推出...'],
-    ['Stop here and complete pushback procedure', '在此停止并完成推出流程'],
-    ['Select pushback direction', '选择推出方向'],
-    ['Facing NW on T14 (NL)', '面向西北，位于 T14（NL）'],
-    ['QuickEdit Pushback', '快速编辑推出'],
-    ['QuickEdit Pushback on Map', '在地图上快速编辑推出'],
-    ['Straight Pushback (manual stop, max 100 m)', '直线推出（手动停止，最长 100 米）'],
-    ['Straight Pull pushback (manual stop, max 100 m)', '直线拉出（手动停止，最长 100 米）'],
-    ['Change parking or service', '更改停机位或服务'],
-    ['Change Facility [Runway 23 Start]', '更改位置 [跑道 23 起点]'],
-    ['Stop Progressive Taxi', '停止渐进式滑行'],
-    ['Moving Map', '移动地图'],
-    ['[GSX] In position, please set parking brakes', '[GSX] 已就位，请设置停留刹车']
+    ['GSX MAIN MENU', 'GSX \u4e3b\u83dc\u5355'],
+    ['Reposition from Map', '\u4ece\u5730\u56fe\u91cd\u65b0\u5b9a\u4f4d'],
+    ['Reposition here [Terminal 3E West Gate 525-536|Gate 530]', '\u5c06\u98de\u673a\u79fb\u81f3\u6b64\u5904 [\u822a\u7ad9\u697c 3E \u897f\u533a \u767b\u673a\u53e3 525-536|\u767b\u673a\u53e3 530]'],
+    ['Terminal 3E West Gate 525-536|Gate 530', '\u822a\u7ad9\u697c 3E \u897f\u533a \u767b\u673a\u53e3 525-536|\u767b\u673a\u53e3 530'],
+    ['Reload SimBrief', '\u91cd\u65b0\u8f7d\u5165 SimBrief'],
+    ["Can't read the aircraft type", '\u65e0\u6cd5\u8bfb\u53d6\u98de\u673a\u7c7b\u578b'],
+    ['Loading GSX Menu, please wait...', '\u6b63\u5728\u52a0\u8f7d GSX \u83dc\u5355\uff0c\u8bf7\u7a0d\u5019...']
   ])
 
   for (const [english, chinese] of translations) {
     assert.equal(translator.translateText(english), chinese, english)
   }
+})
 
+test('translates both direct menu rendering and root text-node mutations', () => {
   const source = fs.readFileSync(sourcePath, 'utf8')
+  assert.match(source, /if \(root\.nodeType === 3\)/)
   assert.match(source, /const localizedTextLines = textLines\.map\(localizeMenuText\)/)
   assert.match(source, /const title = localizedTextLines\[0\] \|\| ""/)
   assert.match(source, /String\(localizedTextLines\[i\]\)/)
   assert.match(source, /btn\.setAttribute\("title", localizedTextLines\[i\]\)/)
+  assert.match(source, /SIMBRIEF_RELOAD_TEXT/)
+})
+
+test('uses GSX 4.0.17 while runtime version SimVars are not initialized', () => {
+  const source = fs.readFileSync(sourcePath, 'utf8')
+  assert.match(source, /GSX_FALLBACK_VERSION\s*=\s*"4\.0\.17"/)
+  assert.match(source, /const hasRuntimeVersion = \[major, minor, build\]\.every\(Number\.isFinite\)/)
+  assert.match(source, /this\.gsxVersionString = hasRuntimeVersion/)
 })

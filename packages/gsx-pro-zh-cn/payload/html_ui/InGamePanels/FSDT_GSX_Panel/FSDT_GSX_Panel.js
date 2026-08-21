@@ -1,4 +1,4 @@
-/* GSX Pro 4.0.15 Simplified Chinese patch v1.2.4. */
+/* GSX Pro 4.0.17 Simplified Chinese patch v1.2.5. */
 var GSX_ZH_CN = (function initGsxChinese(root, factory) {
   const api = factory();
 
@@ -157,6 +157,7 @@ var GSX_ZH_CN = (function initGsxChinese(root, factory) {
     ["Select parking position", "选择停机位"],
     ["Reposition Aircraft", "重新放置飞机"],
     ["Reposition here", "将飞机移至此处"],
+    ["Reposition from Map", "\u4ece\u5730\u56fe\u91cd\u65b0\u5b9a\u4f4d"],
     ["Apply hotfix", "应用热修复"],
     ["Apply hotfix and restart GSX", "应用热修复并重启 GSX"],
     ["Applying hotfix, please wait...", "正在应用热修复，请稍候..."],
@@ -444,6 +445,17 @@ var GSX_ZH_CN = (function initGsxChinese(root, factory) {
       .replace(/\.{4,}$/, "...");
   }
 
+  function translateAirportLocation(value) {
+    return value
+      .replace(/\bTerminal\b/gi, "\u822a\u7ad9\u697c")
+      .replace(/\bConcourse\b/gi, "\u6307\u5eca")
+      .replace(/\bWest\b/gi, "\u897f\u533a")
+      .replace(/\bEast\b/gi, "\u4e1c\u533a")
+      .replace(/\bNorth\b/gi, "\u5317\u533a")
+      .replace(/\bSouth\b/gi, "\u5357\u533a")
+      .replace(/\bGate\b/gi, "\u767b\u673a\u53e3");
+  }
+
   function translateCore(value) {
     const normalized = normalizeLookupText(value);
     const direct = exact.get(value)
@@ -451,6 +463,14 @@ var GSX_ZH_CN = (function initGsxChinese(root, factory) {
       || exact.get(normalized)
       || exactLower.get(normalized.toLowerCase());
     if (direct) return direct;
+
+    const repositionMatch = normalized.match(/^Reposition here(?:\s+\[(.+)\])?$/i);
+    if (repositionMatch) {
+      return "\u5c06\u98de\u673a\u79fb\u81f3\u6b64\u5904" + (repositionMatch[1] ? " [" + translateAirportLocation(repositionMatch[1]) + "]" : "");
+    }
+
+    const airportLocation = translateAirportLocation(value);
+    if (airportLocation !== value) return airportLocation;
 
     if (/^loading\s+gsx\s+menu(?:,\s*please\s+wait)?(?:\.|\u2026)*$/i.test(normalized)) {
       return "正在加载 GSX 菜单，请稍候...";
@@ -710,6 +730,12 @@ var GSX_ZH_CN = (function initGsxChinese(root, factory) {
   function translateTree(root) {
     var walker, node;
     if (!root || !window.GSX_ZH_CN) return;
+    if (root.nodeType === 3) {
+      if (!root.parentNode || !/^(SCRIPT|STYLE|TEXTAREA)$/i.test(root.parentNode.nodeName)) {
+        root.nodeValue = window.GSX_ZH_CN.translateText(root.nodeValue);
+      }
+      return;
+    }
     walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT, null, false);
     while ((node = walker.nextNode())) {
       if (node.parentNode && /^(SCRIPT|STYLE|TEXTAREA)$/i.test(node.parentNode.nodeName)) continue;
@@ -848,9 +874,9 @@ const MAX_MESSAGE_QUEUE_LENGTH = 8;
 const CHOICE_CONTEXT_CLOSE_RESTART_ENGINE = 13; // Used in loadFileNoCache timeout
 const CHOICE_SIMBRIEF_RELOAD = 14; // Used in closeWithChoice for SimBrief reload action
 const CHOICE_SETTINGS = 12; // GSX Settings (button13) — kept named so closeWithChoice can skip hideMenu
-const SIMBRIEF_LOADING_TEXT = "正在重新载入 SimBrief";
-const SIMBRIEF_RELOAD_TEXT = "重新载入 SimBrief";
-const GSX_FALLBACK_VERSION = "4.0.15";
+const SIMBRIEF_LOADING_TEXT = "\u6b63\u5728\u91cd\u65b0\u8f7d\u5165 SimBrief";
+const SIMBRIEF_RELOAD_TEXT = "\u91cd\u65b0\u8f7d\u5165 SimBrief";
+const GSX_FALLBACK_VERSION = "4.0.17";
 const DEFAULT_MENU_SUBTITLE_INDICATOR = "subtitle";
 const EXTERNAL_SYSTEM_TOGGLE_RELOAD_MENU = 1;
 const EXTERNAL_SYSTEM_TOGGLE_HIDE_MENU = 2;
@@ -1802,6 +1828,12 @@ class IngamePanelGSX extends TemplateElement
 		// Python resumes writing anyway.
 		setTimeout(() => this._clearAllStartupProgressWhenReady(0), 0);
 
+		// False until L:FSDT_GSX_HOTKEY_CUR has been read as > 0 — i.e. until
+		// the ENGINE has told us the combo actually in force. Everything before
+		// that is the packaged hotkey.js, which any update rewrites back to the
+		// stock Ctrl+Shift+F12. See _hotkeyIsStockDefault for what this gates.
+		this._hotkeyConfirmed = false;
+
 		try
 		{
 			this.hotkey = hotkey;
@@ -1827,6 +1859,7 @@ class IngamePanelGSX extends TemplateElement
 			if (v > 0)
 			{
 				this._lastHotkeyCur = v;
+				this._hotkeyConfirmed = true;
 				this.hotkey = {
 					keyCode: v & 0xff,
 					ctrlKey: !!(v & 0x100),
@@ -1872,6 +1905,12 @@ class IngamePanelGSX extends TemplateElement
 
 			let choice = -1;
 
+			// Take the engine's published combo before comparing: every other
+			// adopt point only runs once the menu has been opened at least
+			// once, so until then this.hotkey is the packaged default rather
+			// than the user's. See _adoptPublishedHotkeyOnce.
+			this._adoptPublishedHotkeyOnce();
+
 			if (e.keyCode == this.hotkey.keyCode && e.ctrlKey == this.hotkey.ctrlKey && e.shiftKey == this.hotkey.shiftKey && e.altKey == this.hotkey.altKey)
 			{
 				// MSFS 2020: the panel owns the keyboard hotkey toggle.
@@ -1880,7 +1919,30 @@ class IngamePanelGSX extends TemplateElement
 				// even when this panel is fully closed; firing here too would
 				// double-toggle. The rebind UI that writes hotkey.json is
 				// unchanged — only this keydown ACTION is suppressed on 2024.
-				if (!this.ms2024Mode)
+				// Re-poll rather than trusting the latched value. Same cold-
+				// start race _applyMs2024Gradient documents and already guards
+				// against: Python writes L:FSDT_GSX_MSFS2024 during its init,
+				// but GSX starts ~2 min into a session, so on a fresh boot this
+				// panel reads 0 and `this.ms2024Mode` LATCHES there. The theme
+				// got the re-poll; this gate never did — so on 2024 the panel
+				// fired the hotkey itself during that window, on top of Python's
+				// SimConnect binding. Worse, the combo it fired was whatever the
+				// package hotkey.js held, which after an update is the stock
+				// Ctrl+Shift+F12 — reported as "F12 opens the menu on a cold
+				// start, then it stops and the real hotkey works".
+				// ...and never act on a combo the engine has not confirmed, when
+				// that combo is the stock one an update just wrote back over the
+				// user's. Reported after the fix above: with the menu hidden by
+				// TIMEOUT or the X icon, the stock combo started opening it again.
+				// Closing with the user's own hotkey never showed it — that path
+				// needs a keydown, and the keydown is what runs the adopt, so it
+				// can only happen when the adopt has already succeeded. The two
+				// silent paths force no adopt, so a panel whose HOTKEY_CUR read
+				// came back 0 keeps answering the stock combo indefinitely.
+				// Suppressing it costs nothing real: a rebind writes hotkey.js
+				// with the user's own combo, which is not the stock one and still
+				// fires unconfirmed.
+				if (!this._ms2024ModeNow() && !(this._hotkeyIsStockDefault() && !this._hotkeyConfirmed))
 					this.fireHotkey();
 			}
 
@@ -2105,6 +2167,7 @@ class IngamePanelGSX extends TemplateElement
 						this._lastHotkeyCur = this._lastHotkeyCur | 0;
 						this._hotkeyCurTimer = setInterval(() => {
 							const v = SimVar.GetSimVarValue(SIMVAR_HOTKEY_CUR, "number") | 0;
+							if (v > 0) this._hotkeyConfirmed = true;
 							if (v > 0 && v !== this._lastHotkeyCur) {
 								this._lastHotkeyCur = v;
 								this.hotkey = {
@@ -2148,9 +2211,6 @@ class IngamePanelGSX extends TemplateElement
 					this.simBriefBtnLabel = this.simBriefBtn
 						? this.simBriefBtn.querySelector(".bottom-btn-label")
 						: null;
-					if (this.simBriefBtnLabel) {
-						this.simBriefBtnLabel.textContent = SIMBRIEF_RELOAD_TEXT;
-					}
 					// Status detail span — third column of the SimBrief
 					// button row. Renders the error text / flight-plan
 					// summary that used to live in a separate
@@ -2687,6 +2747,74 @@ class IngamePanelGSX extends TemplateElement
 	// three chrome icons (close, detach, reduce). Called from both the
 	// panel-active init (after DOM wiring) and from showMenu (after a
 	// menu refresh that might have cleared the inline style).
+	_adoptPublishedHotkeyOnce()
+	{
+		// Adopt HOTKEY_CUR if the engine has published it and we have never
+		// adopted before. After that the 2 s poll and renderHotkeyButton keep
+		// `this.hotkey` current, so this costs one SimVar read per keydown only
+		// until the first successful adopt.
+		//
+		// Needed because every other adopt point is bootstrapped by the FIRST
+		// MENU OPEN: renderHotkeyButton runs when the menu paints, and the poll
+		// itself is created in the same menu-build block. Until then the panel
+		// answers to whatever the packaged hotkey.js held — the stock
+		// Ctrl+Shift+F12 after any update, since Python's restore cannot beat
+		// the panel mount. On 2024 that let the stock combo open the menu once
+		// (the open then adopted the real one, which is why it worked exactly
+		// once). On 2020, where this panel OWNS the hotkey, it is worse: the
+		// user's own key does nothing until they open the menu from the toolbar
+		// to bootstrap the sync.
+		if (this._lastHotkeyCur) return;
+		try
+		{
+			const v = SimVar.GetSimVarValue(SIMVAR_HOTKEY_CUR, "number") | 0;
+			if (v > 0)
+			{
+				this._lastHotkeyCur = v;
+				this._hotkeyConfirmed = true;
+				this.hotkey = {
+					keyCode: v & 0xff,
+					ctrlKey: !!(v & 0x100),
+					altKey: !!(v & 0x200),
+					shiftKey: !!(v & 0x400)
+				};
+			}
+		}
+		catch (error) { /* SimVar not ready — the poll corrects later */ }
+	}
+
+	_hotkeyIsStockDefault()
+	{
+		// The combo the packaged hotkey.js ships with, and the one every update
+		// restores over a rebind. Holding it means either the user really did
+		// pick Ctrl+Shift+F12, or we are reading a file that was just reset —
+		// indistinguishable from here, which is why the keydown gate pairs this
+		// with _hotkeyConfirmed rather than trusting it on its own.
+		const h = this.hotkey;
+		return !!h && h.keyCode === 123 && !!h.ctrlKey && !!h.shiftKey && !h.altKey;
+	}
+
+	_ms2024ModeNow()
+	{
+		// The LIVE value of L:FSDT_GSX_MSFS2024, latching `this.ms2024Mode`
+		// forward as soon as Python publishes it. Callers that must not act on
+		// a stale 0 (the keydown hotkey gate) use this instead of the field.
+		// Read-only apart from that latch: the theme side-effects belong to
+		// _applyMs2024Gradient, which keeps its own re-poll.
+		try
+		{
+			const current = SimVar.GetSimVarValue(SIMVAR_MSFS2024_MODE, "number");
+			if (current) this.ms2024Mode = current;
+			// Latch FORWARD only. The re-poll exists for the cold-start 0 that
+			// precedes Python's write, but a 0 read AFTER we have seen 2024 mode
+			// is noise, not a downgrade — the sim cannot stop being MSFS 2024
+			// mid-session. Returning the raw 0 there let the panel fire the
+			// hotkey itself on top of Python's SimConnect binding.
+			return current || this.ms2024Mode;
+		}
+		catch (error) { return this.ms2024Mode; }
+	}
+
 	_applyMs2024Gradient()
 	{
 		// Re-poll L:FSDT_GSX_MSFS2024 each call. The original cold-
@@ -3472,7 +3600,7 @@ class IngamePanelGSX extends TemplateElement
 		// gets a `title` attribute so the CSS hover tooltip
 		// surfaces the full text. The +1 px tolerance absorbs
 		// Coherent's older Chromium sub-pixel rounding.
-		const value = GSX_ZH_CN.translateText(text || "");
+		const value = text || "";
 		if (this.simBriefStatusSpan) {
 			this.simBriefStatusSpan.textContent = value;
 		}
@@ -6532,7 +6660,7 @@ class IngamePanelGSX extends TemplateElement
 		// confusing too. CSS `order: -1` on #pagePrompt renders it
 		// above loadingPrompt despite the HTML source order.
 		if (this.pagePrompt) {
-			this.pagePrompt.textContent = GSX_ZH_CN.translateText(text || "Loading GSX Menu, please wait...");
+			this.pagePrompt.textContent = text || "Loading GSX Menu, please wait...";
 			// Drop the MSFS-2024 blue gradient that gets applied as
 			// inline style on showMenu — for the loading title we want
 			// the default h3 dark backdrop, not the menu-active styling.
@@ -6970,10 +7098,6 @@ class IngamePanelGSX extends TemplateElement
 		if (this.loadingPrompt) this.loadingPrompt.style.display = "none";
 		if (this.loadingImage) this.loadingImage.style.display = "none";
 
-		// Preserve the source menu values for button choice handling and
-		// automation, but localize every value copied into the DOM. The
-		// MutationObserver cannot reliably see Coherent's custom-element
-		// subtree updates, so the rendering path must translate explicitly.
 		const localizeMenuText = (value) => {
 			const sourceText = value == null ? "" : String(value);
 			if (!window.GSX_ZH_CN || typeof window.GSX_ZH_CN.translateText !== "function") return sourceText;
@@ -7029,7 +7153,7 @@ class IngamePanelGSX extends TemplateElement
 			if (btn)
 			{
 				btn.classList.toggle("vr-disabled", (vrMask & (1 << (i - 1))) !== 0);
-				if (i <= this.nEntries && textLines[i] && textLines[i].trim() !== '')
+				if (i <= this.nEntries && localizedTextLines[i] && localizedTextLines[i].trim() !== '')
 				{
 					var optionN = (i == MAX_DYNAMIC_MENU_BUTTONS) ? 0 : i; // Button 10 maps to choice 0
 					// Render the digit as a small inline-SVG keycap
