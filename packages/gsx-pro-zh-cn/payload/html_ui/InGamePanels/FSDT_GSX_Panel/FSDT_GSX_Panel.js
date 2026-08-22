@@ -1,4 +1,4 @@
-/* GSX Pro 4.0.17 Simplified Chinese patch v1.2.5. */
+/* GSX Pro 4.0.17 Simplified Chinese patch v1.2.6. */
 var GSX_ZH_CN = (function initGsxChinese(root, factory) {
   const api = factory();
 
@@ -456,6 +456,10 @@ var GSX_ZH_CN = (function initGsxChinese(root, factory) {
       .replace(/\bGate\b/gi, "\u767b\u673a\u53e3");
   }
 
+  function isAirportLocationLabel(value) {
+    return /^\s*(?:(?:Terminal|Concourse)\b.*\bGate\b|Gate\s+(?=[A-Z0-9-]*\d)[A-Z0-9-]+|(?:West|East|North|South)\s+Gate\b)/i.test(value);
+  }
+
   function translateCore(value) {
     const normalized = normalizeLookupText(value);
     const direct = exact.get(value)
@@ -469,8 +473,10 @@ var GSX_ZH_CN = (function initGsxChinese(root, factory) {
       return "\u5c06\u98de\u673a\u79fb\u81f3\u6b64\u5904" + (repositionMatch[1] ? " [" + translateAirportLocation(repositionMatch[1]) + "]" : "");
     }
 
-    const airportLocation = translateAirportLocation(value);
-    if (airportLocation !== value) return airportLocation;
+    if (isAirportLocationLabel(value)) {
+      const airportLocation = translateAirportLocation(value);
+      if (airportLocation !== value) return airportLocation;
+    }
 
     if (/^loading\s+gsx\s+menu(?:,\s*please\s+wait)?(?:\.|\u2026)*$/i.test(normalized)) {
       return "正在加载 GSX 菜单，请稍候...";
@@ -723,41 +729,6 @@ var GSX_ZH_CN = (function initGsxChinese(root, factory) {
   };
 });
 
-
-
-(function installGsxChineseObserver() {
-  if (typeof document === 'undefined' || typeof MutationObserver === 'undefined') return;
-  function translateTree(root) {
-    var walker, node;
-    if (!root || !window.GSX_ZH_CN) return;
-    if (root.nodeType === 3) {
-      if (!root.parentNode || !/^(SCRIPT|STYLE|TEXTAREA)$/i.test(root.parentNode.nodeName)) {
-        root.nodeValue = window.GSX_ZH_CN.translateText(root.nodeValue);
-      }
-      return;
-    }
-    walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT, null, false);
-    while ((node = walker.nextNode())) {
-      if (node.parentNode && /^(SCRIPT|STYLE|TEXTAREA)$/i.test(node.parentNode.nodeName)) continue;
-      node.nodeValue = window.GSX_ZH_CN.translateText(node.nodeValue);
-    }
-    if (root.nodeType === 1) {
-      ['title', 'placeholder', 'aria-label', 'data-tooltip'].forEach(function (name) {
-        if (root.hasAttribute(name)) root.setAttribute(name, window.GSX_ZH_CN.translateText(root.getAttribute(name)));
-      });
-    }
-  }
-  function start() {
-    translateTree(document.body);
-    new MutationObserver(function (records) {
-      records.forEach(function (record) {
-        if (record.type === 'characterData') translateTree(record.target);
-        record.addedNodes.forEach(translateTree);
-      });
-    }).observe(document.body, { childList: true, subtree: true, characterData: true });
-  }
-  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', start); else start();
-}());
 
 // Polyfill for AbortController and AbortSignal if not available
 if (typeof AbortController === 'undefined') {
@@ -1277,11 +1248,12 @@ class NotificationManager {
 
     showTooltip(msg, posXRel = DEFAULT_TOOLTIP_POS_X, posYRel = DEFAULT_TOOLTIP_POS_Y) {
         console.log("NotificationManager.showTooltip()");
+        const localizedMessage = GSX_ZH_CN.translateText(msg);
         if (this._useStatusTooltip()) {
-            this.panel.statusTooltip.textContent = msg;
+            this.panel.statusTooltip.textContent = localizedMessage;
             this.panel.statusTooltip.classList.add("active");
         } else {
-            Coherent.trigger("SHOW_TOOLTIP", GSX_TOOLTIP_NAME, msg, posXRel + (this.ms2024Mode * MS2024_MODE_POS_X_MULTIPLIER), posYRel + (this.ms2024Mode * MS2024_MODE_POS_Y_MULTIPLIER), msg.length * TOOLTIP_DURATION_MS_PER_CHAR);
+            Coherent.trigger("SHOW_TOOLTIP", GSX_TOOLTIP_NAME, localizedMessage, posXRel + (this.ms2024Mode * MS2024_MODE_POS_X_MULTIPLIER), posYRel + (this.ms2024Mode * MS2024_MODE_POS_Y_MULTIPLIER), localizedMessage.length * TOOLTIP_DURATION_MS_PER_CHAR);
         }
     }
 
@@ -3413,8 +3385,10 @@ class IngamePanelGSX extends TemplateElement
 		this._applyMenuDocument("");
 		this._applyMenuHtml("");
 
-		title.textContent = req.title;
-		desc.textContent = req.description;
+		const reqTitle = GSX_ZH_CN.translateText(req.title);
+		const reqDescription = GSX_ZH_CN.translateText(req.description);
+		title.textContent = reqTitle;
+		desc.textContent = reqDescription;
 		input.maxLength = req.maxLength;
 		input.value = req.defaultText;
 		// Suppress the new-push-button shadow-DOM white-focus overlay
@@ -3593,6 +3567,7 @@ class IngamePanelGSX extends TemplateElement
 	
 	_setSimBriefStatus(text)
 	{
+		const localizedStatus = GSX_ZH_CN.translateText(text || "");
 		// Single setter for the SimBrief status detail. Writes the
 		// text into the in-button .simbrief-status span, then
 		// schedules an overflow check next frame — when the span's
@@ -3600,7 +3575,7 @@ class IngamePanelGSX extends TemplateElement
 		// gets a `title` attribute so the CSS hover tooltip
 		// surfaces the full text. The +1 px tolerance absorbs
 		// Coherent's older Chromium sub-pixel rounding.
-		const value = text || "";
+		const value = localizedStatus;
 		if (this.simBriefStatusSpan) {
 			this.simBriefStatusSpan.textContent = value;
 		}
@@ -4544,14 +4519,16 @@ class IngamePanelGSX extends TemplateElement
 			return; // stale duplicate (double listener, resync replay)
 		}
 		this._busLastSeq[msg.surface] = msg.seq;
+		const surface = msg.surface;
 		const data = msg.data || {};
-		this._busCache[msg.surface] = data;
+		const localizedData = GSX_ZH_CN.translateSurface(surface, data);
+		this._busCache[surface] = localizedData;
 		this._enterBusMode();
 		// Contain per-surface render exceptions — one bad payload must
 		// not kill the listener callback (and with it every subsequent
 		// surface delivery).
 		try {
-			this._applyBusSurface(msg.surface, data);
+			this._applyBusSurface(surface, localizedData);
 		} catch (e) {
 			console.error("CommBus transport: applying '" + msg.surface + "' threw:", e);
 		}
@@ -4914,6 +4891,7 @@ class IngamePanelGSX extends TemplateElement
 
 	_applyMenuDocument(content, viaBus)
 	{
+		content = GSX_ZH_CN.translateHtmlPayload(content);
 		if (!this.menuDocumentFrame) return;
 		// Full-page document mode: Python marks a document that should
 		// own the whole panel (the WASM "View Log" page) with
@@ -5096,6 +5074,7 @@ class IngamePanelGSX extends TemplateElement
 
 	_applyMenuHtml(content)
 	{
+		content = GSX_ZH_CN.translateHtmlPayload(content);
 		if (!this.menuButtonsHost || !this.dynamicButtons) return;
 		if (this._hasRenderableContent(content)) {
 			// Rich layout takes over the dynamic area: mount the
@@ -5894,6 +5873,7 @@ class IngamePanelGSX extends TemplateElement
 
 	_applyStatusHtml(html)
 	{
+		html = GSX_ZH_CN.translateHtmlPayload(html);
 		// Shared applier — fed by the file fetch (legacy/dev) and the
 		// CommBus push (MSFS2024 production). Body unchanged from the
 		// original reloadStatus fetch callback.
@@ -6006,6 +5986,7 @@ class IngamePanelGSX extends TemplateElement
 
 	_applyMenuLiveHtml(html)
 	{
+		html = GSX_ZH_CN.translateHtmlPayload(html);
 		// Shared applier — fed by the file fetch (legacy/dev) and the
 		// CommBus push (MSFS2024 production). Body unchanged from the
 		// original reloadMenuLive fetch callback.
@@ -6082,6 +6063,7 @@ class IngamePanelGSX extends TemplateElement
 
 	_applySettingsHtml(html)
 	{
+		html = GSX_ZH_CN.translateHtmlPayload(html);
 		// Shared applier — fed by the file fetch (legacy/dev) and the
 		// CommBus push (MSFS2024 production). Body unchanged from the
 		// original reloadSettings fetch callback, including the tab-
@@ -6660,7 +6642,8 @@ class IngamePanelGSX extends TemplateElement
 		// confusing too. CSS `order: -1` on #pagePrompt renders it
 		// above loadingPrompt despite the HTML source order.
 		if (this.pagePrompt) {
-			this.pagePrompt.textContent = text || "Loading GSX Menu, please wait...";
+			const localizedValue = GSX_ZH_CN.translateText(text || "Loading GSX Menu, please wait...");
+			this.pagePrompt.textContent = localizedValue;
 			// Drop the MSFS-2024 blue gradient that gets applied as
 			// inline style on showMenu — for the loading title we want
 			// the default h3 dark backdrop, not the menu-active styling.
